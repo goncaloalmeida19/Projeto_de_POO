@@ -32,11 +32,10 @@ public class Venda {
     
     public void addCarrinho(Produto produto) {
         Item i = contemProduto(produto);
-        if(i != null)
+        if(i != null) {
             i.incrementarQuantidade();
-        else{
-            carrinho.add(new Item(produto, 1));
         }
+        else carrinho.add(new Item(produto, 1));
     }
 
     public boolean removeCarrinho(Produto produto) {
