@@ -11,4 +11,8 @@ public class Limpeza extends Produto{
     public int getToxicidade() {
         return toxicidade;
     }
+
+    public double precoDeEnvio(){
+        return 0;
+    }
 }

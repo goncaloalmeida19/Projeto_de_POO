@@ -17,4 +17,9 @@ public class Mobiliario extends Produto{
     public Dimensao getDim() {
         return dim;
     }
+
+    public double precoDeEnvio(){
+        if(peso > 15) return 10;
+        else return 0;
+    }
 }

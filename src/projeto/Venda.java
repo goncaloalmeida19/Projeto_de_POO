@@ -47,7 +47,22 @@ public class Venda {
         }else return false;
     }
 
-    public double precoFinal(){
-        return 0.0;
+    public double precoDeEnvio(Cliente cliente, double preco) {
+        double envio = cliente.precoDeEnvio(preco);
+
+        // Se for um produto do tipo mobiliário irá somar 15 euros, ao preço final, por produto
+        for(Item i: carrinho){
+            envio += (i.getProduto().precoDeEnvio() * i.getQuantidade());
+        }
+
+        return envio;
+    }
+
+    public double precoSemEnvio(){
+        double preco = 0;
+        for(Item i: carrinho){
+            preco += i.getProduto().obterPreco(i.getQuantidade(), data);
+        }
+        return preco;
     }
 }

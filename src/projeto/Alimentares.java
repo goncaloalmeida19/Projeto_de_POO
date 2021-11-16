@@ -17,4 +17,8 @@ public class Alimentares extends Produto{
     public double getGordura() {
         return gordura;
     }
+
+    public double precoDeEnvio(){
+        return 0;
+    }
 }

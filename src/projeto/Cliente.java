@@ -34,4 +34,6 @@ public abstract class Cliente {
     public int getData() {
         return Data;
     }
+
+    public abstract double precoDeEnvio(double preco);
 }
