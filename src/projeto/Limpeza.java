@@ -3,8 +3,8 @@ package projeto;
 public class Limpeza extends Produto{
     private final int toxicidade;
 
-    public Limpeza(String identificador, String nome, int precoUni, Promocao promo, int toxicidade) {
-        super(identificador, nome, precoUni, promo);
+    public Limpeza(String identificador, String nome, double precoUni, int toxicidade) {
+        super(identificador, nome, precoUni);
         this.toxicidade = toxicidade;
     }
 
