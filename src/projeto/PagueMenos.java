@@ -1,14 +1,12 @@
 package projeto;
 
 public class PagueMenos extends Promocao{
-    private int desconto;
 
     public PagueMenos(Data inicio, Data fim) {
         super(inicio, fim);
-        this.desconto = 0;
     }
 
-    public void addDesconto() {
-        this.desconto += 5;
+    public double desconto(int quantidade, double precoUni){
+        return precoUni + (precoUni * 0.05) * quantidade;
     }
 }

@@ -37,12 +37,14 @@ public abstract class Produto {
     }
     
     public double obterPreco(int quantidade, Data d){
+        double desconto = 0;
         for (Promocao p: promocoes){
             if(d.compareTo(p.getInicio()) >= 0 && d.compareTo(p.getFim()) <= 0){
-                return precoUni * quantidade - p.desconto(quantidade, d, precoUni);
+                desconto = p.desconto(quantidade, precoUni);
+                break;
             }
         }
-        // return precoUni * quantidade - obterPromocaoAtual(quantidade, d);
+        return precoUni * quantidade - desconto;
     }
 
     public boolean igual(Produto p){

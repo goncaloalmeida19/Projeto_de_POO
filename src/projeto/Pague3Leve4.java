@@ -5,5 +5,7 @@ public class Pague3Leve4 extends Promocao{
         super(inicio, fim);
     }
 
-    public double desconto(int quantidade, Data d, double precoUni)
+    public double desconto(int quantidade, double precoUni){
+        return precoUni * (quantidade % 4);
+    }
 }

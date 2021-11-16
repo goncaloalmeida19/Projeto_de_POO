@@ -16,4 +16,6 @@ public abstract class Promocao {
     public Data getFim() {
         return fim;
     }
+
+    public abstract double desconto(int quantidade, double precoUni);
 }
