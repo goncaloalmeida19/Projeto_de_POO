@@ -1,16 +1,19 @@
 package projeto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Produto {
     private final String identificador;
     private final String nome;
     private final int precoUni;
-    private final Promocao promo;
+    private final List<Promocao> promocoes;
 
-    public Produto(String identificador, String nome, int precoUni, Promocao promo) {
+    public Produto(String identificador, String nome, int precoUni) {
         this.identificador = identificador;
         this.nome = nome;
         this.precoUni = precoUni;
-        this.promo = promo;
+        this.promocoes = new ArrayList();
     }
 
     public String getIdentificador() {
@@ -24,8 +27,21 @@ public abstract class Produto {
     public int getPrecoUni() {
         return precoUni;
     }
-
-    public Promocao getPromo() {
-        return promo;
+    
+    public void addPromocoes(Promocao p){
+        promocoes.add(p);
+    }
+    
+    public List<Promocao> getPromocoes(){
+        return promocoes;
+    }
+    
+    public double obterPreco(int quantidade, Data d){
+        return 0;
+        //return precoUni * quantidade - obterPromocaoAtual(quantidade, d);
+    }
+    
+    public boolean igual(Produto p){
+        return identificador.equals(p.identificador) && nome.equals(p.nome);
     }
 }
