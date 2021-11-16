@@ -3,13 +3,13 @@ package projeto;
 public abstract class Produto {
     private final String identificador;
     private final String nome;
-    private final int preco;
+    private final int precoUni;
     private final Promocao promo;
 
-    public Produto(String identificador, String nome, int preco, Promocao promo) {
+    public Produto(String identificador, String nome, int precoUni, Promocao promo) {
         this.identificador = identificador;
         this.nome = nome;
-        this.preco = preco;
+        this.precoUni = precoUni;
         this.promo = promo;
     }
 
@@ -21,8 +21,8 @@ public abstract class Produto {
         return nome;
     }
 
-    public int getPreco() {
-        return preco;
+    public int getPrecoUni() {
+        return precoUni;
     }
 
     public Promocao getPromo() {
