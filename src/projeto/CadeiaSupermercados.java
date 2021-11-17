@@ -14,4 +14,8 @@ public class CadeiaSupermercados {
         }
         return null;
     }
+
+    public void confirmaVenda(Venda venda, Cliente cliente){
+        cliente.addVenda(venda);
+    }
 }
