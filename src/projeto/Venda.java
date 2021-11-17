@@ -41,7 +41,7 @@ public class Venda {
     public boolean removeCarrinho(Produto produto) {
         Item i = contemProduto(produto);
         if(i != null){
-            carrinho.remove(i);
+            i.decrementarQuantidade();
             return true;
         }else return false;
     }
