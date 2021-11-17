@@ -3,16 +3,6 @@ package projeto;
 import java.util.Scanner;
 
 public class Interface {
-
-    // Método que lê um inteiro positivo e devolve-o, sendo -1 em caso de erro
-    public int readIntProtection(Scanner scanner){
-        if(scanner.hasNextInt()) return scanner.nextInt();
-        else{
-            scanner.nextLine();
-            return -1;
-        }
-    }
-
     public String readString(Scanner scanner){
         String s;
         do{
@@ -23,25 +13,36 @@ public class Interface {
 
     // Método que lê uma data e devolve-a, sendo null em caso de erro
     public Data readData(Scanner scanner){
-        int i = 0;
-        int[] dat = new int[3];
-        for (; i < 3; i++) {
-            if(i == 0) System.out.print("Dia: ");
-            else if(i == 1) System.out.print("Mês: ");
-            else System.out.print("Ano: ");
-            // Se o scanner ler um inteiro, guarda o valor na tabela
-            if(scanner.hasNextInt()) dat[i] = scanner.nextInt();
-            else{
-                // Se o scanner não ler um inteiro o programa não termina a execução,
-                // dá outra oportunidade ao utilizador de inserir um elemento
-                System.out.println("Número inválido.");
-                i--;
-                scanner.next();
+        Data d = null;
+        while(d == null){
+            System.out.println("\nData:");
+            d = readData(scanner);
+            System.out.println();
+            if (d == null) 
+                continue;
+
+            int i = 0;
+            int[] dat = new int[3];
+            for (; i < 3; i++) {
+                if(i == 0) System.out.print("Dia: ");
+                else if(i == 1) System.out.print("Mês: ");
+                else System.out.print("Ano: ");
+                // Se o scanner ler um inteiro, guarda o valor na tabela
+                if(scanner.hasNextInt()) dat[i] = scanner.nextInt();
+                else{
+                    // Se o scanner não ler um inteiro o programa não termina a execução,
+                    // dá outra oportunidade ao utilizador de inserir um elemento
+                    System.out.println("Número inválido.");
+                    i--;
+                }
+            }
+            d = new Data(dat[0], dat[1], dat[2]);
+            if(!d.eValida()){
+                d = null;
+                System.out.println("Data inválida");
             }
         }
-        Data d = new Data(dat[0], dat[1], dat[2]);
-        if(d.eValida()) return d;
-        else return null;
+        return d;
     }
 
     public void imprimirComprasRealizadas(Cliente c, Data d){
@@ -67,7 +68,9 @@ public class Interface {
                 +"3. Fazer pagamento.\n"
                 +"4. Fechar menu de compra.");
         System.out.print("Opção: ");
-        int op = readIntProtection(scanner);
+        int op = -1;
+        if(scanner.hasNextInt())
+            op = scanner.nextInt();
         switch (op) {
             case 1:
                 realizarCompra(scanner, v);
@@ -86,39 +89,40 @@ public class Interface {
 
     public void menu(CadeiaSupermercados cad){
         Scanner scanner = new Scanner(System.in);
-        int n = 0;
+        int n = -1;
         while (n != 2) {
             System.out.print("1. Iniciar Sessão\n2. Sair do Programa.\nOpção: ");
-            n = readIntProtection(scanner);
+            if(scanner.hasNextInt())
+                n = scanner.nextInt();
             if (n == 1) {
                 System.out.print("Email: ");
                 Cliente c = cad.contemEmail(readString(scanner));
                 if(c == null) System.out.println("Email inválido.");
                 else {
                     System.out.printf("Login Válido...\n\nBom dia %s!\n", c.getNome());
-                    int op = 0;
+                    Data d = readData(scanner);
+                    int op = -1;
                     while(op != 3) {
-                        System.out.println("\nData:");
-                        Data d = readData(scanner);
-                        System.out.println();
-                        if (d == null) System.out.println("Data inválida");
-                        else {
-                            System.out.println("\n\n1. Realizar uma compra.\n"
-                                    +"2. Consultar as compras realizadas.\n"
-                                    +"3. Terminar sessão.\n");
-                            System.out.print("Opção: ");
-                            op = readIntProtection(scanner);
-                            switch (op) {
-                                case 1:
-                                    menuCompra(d, scanner);
-                                    break;
-                                case 2:
-                                    imprimirComprasRealizadas(c, d);
-                                    break;
-                                default:
-                                    if (op != 3) System.out.println("Opção inválida.");
-                                    break;
-                            }
+                        System.out.println("\n\n1. Realizar uma compra.\n"
+                                + "2. Consultar as compras realizadas.\n"
+                                + "3. Mudar data atual.\n"
+                                + "4. Terminar sessão.\n");
+                        System.out.print("Opção: ");
+                        if(scanner.hasNextInt())
+                            op = scanner.nextInt();
+                        switch (op) {
+                            case 1:
+                                menuCompra(d, scanner);
+                                break;
+                            case 2:
+                                imprimirComprasRealizadas(c, d);
+                                break;
+                            case 3:
+                                d = readData(scanner);
+                                break;
+                            default:
+                                if (op != 4) System.out.println("Opção inválida.");
+                                break;
                         }
                     }
                 }
