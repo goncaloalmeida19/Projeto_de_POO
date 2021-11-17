@@ -64,4 +64,13 @@ public class Venda {
         }
         return preco;
     }
+
+    @Override
+    public String toString() {
+        String produtos = "";
+        for(Item item: carrinho){
+            produtos.concat("\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade());
+        }
+        return produtos;
+    }
 }
