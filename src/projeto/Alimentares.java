@@ -4,8 +4,8 @@ public class Alimentares extends Produto{
     private final int calorias;
     private final double gordura;
 
-    public Alimentares(String identificador, String nome, double precoUni, int calorias, double gordura) {
-        super(identificador, nome, precoUni);
+    public Alimentares(String identificador, String nome, double precoUni, int calorias, double gordura, int stockInicial) {
+        super(identificador, nome, precoUni, stockInicial);
         this.calorias = calorias;
         this.gordura = gordura;
     }
