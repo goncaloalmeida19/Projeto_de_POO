@@ -127,7 +127,7 @@ public class Interface {
                     }
                 }
             }
-            else System.out.println("Opção inválida.");
+            else if(n != 2) System.out.println("Opção inválida.");
         }
     }
 }
