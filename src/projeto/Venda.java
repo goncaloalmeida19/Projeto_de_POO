@@ -69,7 +69,7 @@ public class Venda {
     public String toString() {
         String produtos = "";
         for(Item item: carrinho){
-            produtos.concat("\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade());
+            produtos += "\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade();
         }
         return produtos;
     }
