@@ -7,6 +7,6 @@ public class PagueMenos extends Promocao{
     }
 
     public double desconto(int quantidade, double precoUni){
-        return precoUni + (precoUni * 0.05) * quantidade;
+        return precoUni + precoUni * 0.05 * (quantidade - 1);
     }
 }
