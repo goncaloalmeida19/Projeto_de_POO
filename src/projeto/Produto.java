@@ -8,12 +8,14 @@ public abstract class Produto {
     private final String nome;
     private final double precoUni;
     private final List<Promocao> promocoes;
+    private final int stockInicial;
 
-    public Produto(String identificador, String nome, double precoUni) {
+    public Produto(String identificador, String nome, double precoUni, int stockInicial) {
         this.identificador = identificador;
         this.nome = nome;
         this.precoUni = precoUni;
         this.promocoes = new ArrayList();
+        this.stockInicial = stockInicial;
     }
 
     public String getIdentificador() {
@@ -49,6 +51,26 @@ public abstract class Produto {
 
     public boolean igual(Produto p){
         return identificador.equals(p.identificador) && nome.equals(p.nome);
+    }
+    
+    /**
+     * Procura um produto numa venda
+     * @param v venda
+     * @return quantidade desse produto na venda
+     */
+    private int encontraNaVenda(Venda v){
+        for(Item i: v.getCarrinho())
+            if(i.getProduto().igual(this))
+                return i.getQuantidade();
+        return 0;
+    }
+    
+    public int obterStockAtual(Data d, List<Venda> vendas){
+        int stockAtual = stockInicial;
+        for(Venda v: vendas)
+            if(d.compareTo(v.getData()) >= 0)
+                stockAtual -= encontraNaVenda(v);
+        return stockAtual;
     }
 
     public abstract double precoDeEnvio();
