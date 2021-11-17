@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Interface {
 
-    // Método que lê um inteiro e devolve-o sem erros, se um acontecer devolve -1 (sendo considerado erro neste programa)
+    // Método que lê um inteiro positivo e devolve-o, sendo -1 em caso de erro
     public int readIntProtection(Scanner scanner){
         if(scanner.hasNextInt()) return scanner.nextInt();
         else{
@@ -13,15 +13,15 @@ public class Interface {
         }
     }
 
-    public String readEmail(Scanner scanner){
-        String email;
+    public String readString(Scanner scanner){
+        String s;
         do{
-            email = scanner.nextLine();
-        }while(email.isEmpty());
-        return email;
+            s = scanner.nextLine();
+        }while(s.isEmpty());
+        return s;
     }
 
-    // Método que lê uma data e a devolve, contudo, se a lida for inválida devolve uma data "erro" que é null
+    // Método que lê uma data e devolve-a, sendo null em caso de erro
     public Data readData(Scanner scanner){
         int i = 0;
         int[] dat = new int[3];
@@ -29,10 +29,11 @@ public class Interface {
             if(i == 0) System.out.print("Dia: ");
             else if(i == 1) System.out.print("Mês: ");
             else System.out.print("Ano: ");
-            // Se o scanner ler uma int, guarda o valor na tabela
+            // Se o scanner ler um inteiro, guarda o valor na tabela
             if(scanner.hasNextInt()) dat[i] = scanner.nextInt();
             else{
-                // Se o scanner não ler um inteiro o programa não termina a execução, mas dá outra oportunidade ao utilizador de inserir um elemento
+                // Se o scanner não ler um inteiro o programa não termina a execução,
+                // dá outra oportunidade ao utilizador de inserir um elemento
                 System.out.println("Número inválido.");
                 i--;
                 scanner.next();
@@ -61,20 +62,25 @@ public class Interface {
 
     public void menuCompra(Data d, Scanner scanner) {
         Venda v = new Venda(d);
-        System.out.println("""             
-                1. Ver Catálogo e comprar.
-                2. Ver carrinho.
-                3. Fazer pagamento
-                4. Fechar menu de compra""");
+        System.out.println("\n1. Ver Catálogo e comprar.\n"
+                +"2. Ver carrinho.\n"
+                +"3. Fazer pagamento.\n"
+                +"4. Fechar menu de compra.");
         System.out.print("Opção: ");
         int op = readIntProtection(scanner);
         switch (op) {
-            case 1 -> realizarCompra(scanner, v);
-            case 2 -> verCarrinho(v);
-            case 3 -> confirmarCompra();
-            default -> {
+            case 1:
+                realizarCompra(scanner, v);
+                break;
+            case 2: 
+                verCarrinho(v);
+                break;
+            case 3: 
+                //confirmarCompra();
+                break;
+            default:
                 if (op != 4) System.out.println("Opção inválida.");
-            }
+                break;
         }
     }
 
@@ -86,7 +92,7 @@ public class Interface {
             n = readIntProtection(scanner);
             if (n == 1) {
                 System.out.print("Email: ");
-                Cliente c = cad.contemEmail(readEmail(scanner));
+                Cliente c = cad.contemEmail(readString(scanner));
                 if(c == null) System.out.println("Email inválido.");
                 else {
                     System.out.printf("Login Válido...\n\nBom dia %s!\n", c.getNome());
@@ -97,19 +103,21 @@ public class Interface {
                         System.out.println();
                         if (d == null) System.out.println("Data inválida");
                         else {
-                            System.out.println("""
-                                                    
-                                    1. Realizar uma compra.
-                                    2. Consultar as compras realizadas.
-                                    3. Terminar sessão""");
+                            System.out.println("\n\n1. Realizar uma compra.\n"
+                                    +"2. Consultar as compras realizadas.\n"
+                                    +"3. Terminar sessão.\n");
                             System.out.print("Opção: ");
                             op = readIntProtection(scanner);
                             switch (op) {
-                                case 1 -> menuCompra(d, scanner);
-                                case 2 -> imprimirComprasRealizadas(c, d);
-                                default -> {
+                                case 1:
+                                    menuCompra(d, scanner);
+                                    break;
+                                case 2:
+                                    imprimirComprasRealizadas(c, d);
+                                    break;
+                                default:
                                     if (op != 3) System.out.println("Opção inválida.");
-                                }
+                                    break;
                             }
                         }
                     }
