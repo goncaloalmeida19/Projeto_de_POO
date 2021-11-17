@@ -11,6 +11,7 @@ public class Venda {
     public Venda(Data data) {
         this.data = data;
         carrinho = new ArrayList<>();
+        
     }
 
     public Data getData() {
@@ -46,22 +47,18 @@ public class Venda {
         }else return false;
     }
 
-    public double precoDeEnvio(Cliente cliente, double preco) {
-        double envio = cliente.precoDeEnvio(preco);
-
-        // Se for um produto do tipo mobiliário irá somar 15 euros, ao preço final, por produto
+    public double calculaPrecoTotal(Cliente c){
+        double precoTotal = 0;
         for(Item i: carrinho){
-            envio += (i.getProduto().precoDeEnvio() * i.getQuantidade());
+            //adicionar preço do produto tendo em conta a quantidade e a promoção
+            precoTotal += i.getProduto().obterPreco(i.getQuantidade(), data);
+            //adicionar preço de transporte do produto tendo em conta a quantidade
+            precoTotal += i.getProduto().precoDeEnvio()*i.getQuantidade();
         }
-
-        return envio;
-    }
-
-    public double precoSemEnvio(){
-        double preco = 0;
-        for(Item i: carrinho){
-            preco += i.getProduto().obterPreco(i.getQuantidade(), data);
-        }
-        return preco;
+        
+        //adicionar o custo de envio tendo em conta o tipo de cliente
+        precoTotal += c.precoDeEnvio(precoTotal);
+        
+        return precoTotal;
     }
 }
