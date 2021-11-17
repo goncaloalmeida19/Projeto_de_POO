@@ -6,7 +6,7 @@ public class Frequentes extends Cliente{
     }
 
     public double precoDeEnvio(double preco){
-        if(preco >= 40) return 0;
+        if(preco > 40) return 0;
         else return 15;
     }
 }
