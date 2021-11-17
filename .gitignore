@@ -8,5 +8,5 @@
 /httpRequests/
 
 *.iml
-/.idea
-/out/production/Projeto-de-POO/projeto/
+/.idea/
+/out/

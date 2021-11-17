@@ -18,7 +18,6 @@ public class CadeiaSupermercados {
     }
 
     public String readEmail(Scanner scanner){
-        scanner.next();
         String email;
         do{
             email = scanner.nextLine();
