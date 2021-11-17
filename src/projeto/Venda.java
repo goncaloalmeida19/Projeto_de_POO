@@ -46,7 +46,7 @@ public class Venda {
         }else return false;
     }
 
-    public double precoDeEnvio(Cliente cliente, double preco) {
+    public double precoDeEnvioTotal(Cliente cliente, double preco) {
         double envio = cliente.precoDeEnvio(preco);
 
         // Se for um produto do tipo mobiliário irá somar 15 euros, ao preço final, por produto
