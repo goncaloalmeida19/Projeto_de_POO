@@ -17,11 +17,11 @@ public class Item {
         return quantidade;
     }
 
-    public void incrementarQuantidade() {
-        this.quantidade++;
+    public void incrementarQuantidade(int quantidade) {
+        this.quantidade += quantidade;
     }
 
-    public void decrementarQuantidade() {
-        this.quantidade--;
+    public void decrementarQuantidade(int quantidade) {
+        this.quantidade -= quantidade;
     }
 }

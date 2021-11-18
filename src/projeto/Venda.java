@@ -30,20 +30,23 @@ public class Venda {
         return null;
     }
     
-    public void addCarrinho(Produto produto) {
+    public void addCarrinho(Produto produto, int quantidade) {
         Item i = contemProduto(produto);
         if(i != null) {
-            i.incrementarQuantidade();
+            i.incrementarQuantidade(quantidade);
         }
-        else carrinho.add(new Item(produto, 1));
+        else carrinho.add(new Item(produto, quantidade));
     }
 
-    public boolean removeCarrinho(Produto produto) {
+    public int removeCarrinho(Produto produto, int quantidade) {
         Item i = contemProduto(produto);
         if(i != null){
-            i.decrementarQuantidade();
-            return true;
-        }else return false;
+            int itemQuantidade = i.getQuantidade();
+            if(itemQuantidade - quantidade > 0) i.decrementarQuantidade(quantidade);
+            else if(itemQuantidade - quantidade == 0) carrinho.remove(i);
+            else return -1;
+            return 1;
+        }else return 0;
     }
 
     public double precoDeEnvioTotal(Cliente cliente, double preco) {
@@ -69,7 +72,7 @@ public class Venda {
     public String toString() {
         String produtos = "";
         for(Item item: carrinho){
-            produtos += "\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade();
+            produtos = produtos.concat("\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade());
         }
         return produtos;
     }

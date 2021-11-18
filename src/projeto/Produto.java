@@ -14,7 +14,7 @@ public abstract class Produto {
         this.identificador = identificador;
         this.nome = nome;
         this.precoUni = precoUni;
-        this.promocoes = new ArrayList();
+        this.promocoes = new ArrayList<>();
         this.stockInicial = stockInicial;
     }
 
