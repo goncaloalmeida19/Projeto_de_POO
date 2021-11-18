@@ -33,11 +33,16 @@ public class Venda {
     public int addCarrinho(Produto produto, int quantidade, List<Venda> vendas) {
         Item i = contemProduto(produto);
         if(i != null) {
-            if(produto.obterStockAtual(data, vendas) == 0)
+            int stockAtual = produto.obterStockAtual(data, vendas);
+            if(stockAtual == 0) return -1;
+            else if(stockAtual - quantidade < 0) return 1;
             i.incrementarQuantidade(quantidade);
+            return 1;
+
         }
         else {
             carrinho.add(new Item(produto, quantidade));
+            return 1;
         }
     }
 
