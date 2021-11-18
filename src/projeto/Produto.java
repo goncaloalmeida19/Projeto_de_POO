@@ -37,15 +37,18 @@ public abstract class Produto {
     public List<Promocao> getPromocoes(){
         return promocoes;
     }
-    
-    public double obterPreco(int quantidade, Data d){
-        double desconto = 0;
+
+    public Promocao obterPromocao(Data d){
         for (Promocao p: promocoes){
             if(d.compareTo(p.getInicio()) >= 0 && d.compareTo(p.getFim()) <= 0){
-                desconto = p.desconto(quantidade, precoUni);
-                break;
+                return p;
             }
         }
+        return null;
+    }
+
+    public double obterPreco(int quantidade, Data d){
+        double desconto = obterPromocao(d).desconto(quantidade, precoUni);
         return precoUni * quantidade - desconto;
     }
 

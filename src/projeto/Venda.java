@@ -30,12 +30,15 @@ public class Venda {
         return null;
     }
     
-    public void addCarrinho(Produto produto, int quantidade) {
+    public int addCarrinho(Produto produto, int quantidade, List<Venda> vendas) {
         Item i = contemProduto(produto);
         if(i != null) {
+            if(produto.obterStockAtual(data, vendas) == 0)
             i.incrementarQuantidade(quantidade);
         }
-        else carrinho.add(new Item(produto, quantidade));
+        else {
+            carrinho.add(new Item(produto, quantidade));
+        }
     }
 
     public int removeCarrinho(Produto produto, int quantidade) {
@@ -47,6 +50,16 @@ public class Venda {
             else return -1;
             return 1;
         }else return 0;
+    }
+
+    public int obterQuantidade(Produto p){
+        int n = 0;
+        for(Item i: carrinho){
+            if(i.getProduto().igual(p)){
+                n++;
+            }
+        }
+        return n;
     }
 
     public double precoDeEnvioTotal(Cliente cliente, double preco) {

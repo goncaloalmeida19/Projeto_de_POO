@@ -18,4 +18,7 @@ public abstract class Promocao {
     }
 
     public abstract double desconto(int quantidade, double precoUni);
+
+    @Override
+    public abstract String toString();
 }

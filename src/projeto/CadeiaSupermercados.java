@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CadeiaSupermercados {
-    List<Cliente> clientes = new ArrayList<>();
-    List<Produto> produtos = new ArrayList<>();
+    List<Cliente> clientes;
+    List<Produto> produtos;
+
+    public CadeiaSupermercados() {
+        this.clientes = new ArrayList<>();
+        this.produtos = new ArrayList<>();
+    }
 
     public Cliente contemEmail(String email){
         for(Cliente c: clientes){
@@ -27,5 +32,13 @@ public class CadeiaSupermercados {
             }
         }
         return null;
+    }
+
+    public List<Venda> obterVendas(){
+        List<Venda> vendas = new ArrayList<>();
+        for(Cliente c: clientes){
+            vendas.addAll(c.getVendas());
+        }
+        return vendas;
     }
 }

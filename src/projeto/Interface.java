@@ -1,5 +1,6 @@
 package projeto;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
@@ -53,8 +54,40 @@ public class Interface {
         }
     }
 
-    public void realizarCompra(Scanner scanner, Venda v){
+    public void adicionarItemCarrinho(Scanner scanner, Venda v, List<Venda> vendas, CadeiaSupermercados cad){
+        System.out.print("Produto a adicionar: ");
+        String nomeProduto = readString(scanner);
+        Produto produto = cad.obterProduto(nomeProduto);
+        if(produto == null) System.out.println("Produto inválido");
+        else{
+            int quantidade = 0;
+            do{
+                System.out.print("Quantidade a adicionar: ");
+                boolean valido = scanner.hasNextInt();
+                if(valido) quantidade = scanner.nextInt();
+                if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
+            }while(quantidade <= 0);
+            int adiciona = v.addCarrinho(produto, quantidade, vendas);
+            if(adiciona == 1) System.out.println("Produto adicionado ao carrinho.");
+            else System.out.println("Quantidade a adicionar ao carrinho superior ao stock existente.");
+        }
+    }
 
+    public void realizarCompra(Scanner scanner, Venda v, CadeiaSupermercados cad){
+        List<Venda> vendas = cad.obterVendas();
+        System.out.println("Catálogo:");
+        for(Produto p: cad.produtos){
+            Data data = v.getData();
+            System.out.println("\t" + p.getNome() + " a " + p.getPrecoUni() + " (Stock: "
+                    + (p.obterStockAtual(data, vendas) - v.obterQuantidade(p)) +" Promoção: " + p.obterPromocao(data));
+        }
+        System.out.println("\n1. Adicionar produto do carrinho.\n2. Voltar para o menu de compra.");
+        int op = 2;
+        if(scanner.hasNextInt()) op = scanner.nextInt();
+        if (op == 1) adicionarItemCarrinho(scanner, v, vendas, cad);
+        else {
+            if (op != 2) System.out.println("Opção inválida.");
+        }
     }
 
     public void confirmarCompra(){
@@ -106,7 +139,7 @@ public class Interface {
             if (scanner.hasNextInt())
                 op = scanner.nextInt();
             switch (op) {
-                case 1 -> realizarCompra(scanner, v);
+                case 1 -> realizarCompra(scanner, v, cad);
                 case 2 -> verCarrinho(scanner, v, cad);
                 case 3 -> confirmarCompra();
                 default -> {
