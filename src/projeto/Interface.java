@@ -57,33 +57,31 @@ public class Interface {
 
     }
 
+    public void confirmarCompra(){
+
+    }
+
     public void verCarrinho(Venda v){
         System.out.println("Carrinho:" + v);
     }
 
     public void menuCompra(Data d, Scanner scanner) {
         Venda v = new Venda(d);
-        System.out.println("\n1. Ver Catálogo e comprar.\n"
-                +"2. Ver carrinho.\n"
-                +"3. Fazer pagamento.\n"
-                +"4. Fechar menu de compra.");
+        System.out.println("""
+
+                1. Ver Catálogo e comprar.
+                2. Ver carrinho.
+                3. Fazer pagamento.
+                4. Fechar menu de compra.""");
         System.out.print("Opção: ");
         int op = -1;
         if(scanner.hasNextInt())
             op = scanner.nextInt();
         switch (op) {
-            case 1:
-                realizarCompra(scanner, v);
-                break;
-            case 2: 
-                verCarrinho(v);
-                break;
-            case 3: 
-                //confirmarCompra();
-                break;
-            default:
-                if (op != 4) System.out.println("Opção inválida.");
-                break;
+            case 1 -> realizarCompra(scanner, v);
+            case 2 -> verCarrinho(v);
+            case 3 -> confirmarCompra();
+            default -> {if (op != 4) System.out.println("Opção inválida.");}
         }
     }
 
@@ -103,26 +101,21 @@ public class Interface {
                     Data d = readData(scanner);
                     int op = -1;
                     while(op != 3) {
-                        System.out.println("\n\n1. Realizar uma compra.\n"
-                                + "2. Consultar as compras realizadas.\n"
-                                + "3. Mudar data atual.\n"
-                                + "4. Terminar sessão.\n");
+                        System.out.println("""
+
+                                1. Realizar uma compra.
+                                2. Consultar as compras realizadas.
+                                3. Mudar data atual.
+                                4. Terminar sessão.
+                                """);
                         System.out.print("Opção: ");
                         if(scanner.hasNextInt())
                             op = scanner.nextInt();
                         switch (op) {
-                            case 1:
-                                menuCompra(d, scanner);
-                                break;
-                            case 2:
-                                imprimirComprasRealizadas(c, d);
-                                break;
-                            case 3:
-                                d = readData(scanner);
-                                break;
-                            default:
-                                if (op != 4) System.out.println("Opção inválida.");
-                                break;
+                            case 1 -> menuCompra(d, scanner);
+                            case 2 -> imprimirComprasRealizadas(c, d);
+                            case 3 -> d = readData(scanner);
+                            default -> {if (op != 4) System.out.println("Opção inválida.");}
                         }
                     }
                 }
