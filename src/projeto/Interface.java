@@ -139,7 +139,7 @@ public class Interface {
     public void verCarrinho(Scanner scanner, Venda v, CadeiaSupermercados cad){
         int op = 1;
         while(op != 2){
-            System.out.print("\nCarrinho:");
+            System.out.print("\nCarrinho: ");
             printCarrinho(v.getCarrinho());
             double preco = v.precoSemEnvio();
             System.out.println("\nPreço sem portes: " + preco + "\n");
