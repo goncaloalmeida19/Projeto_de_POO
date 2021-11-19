@@ -48,7 +48,9 @@ public abstract class Produto {
     }
 
     public double obterPreco(int quantidade, Data d){
-        double desconto = obterPromocao(d).desconto(quantidade, precoUni);
+        Promocao promo = obterPromocao(d);
+        if(promo == null) return precoUni * quantidade;
+        double desconto = promo.desconto(quantidade, precoUni);
         return precoUni * quantidade - desconto;
     }
 

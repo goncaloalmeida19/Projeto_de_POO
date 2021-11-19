@@ -6,7 +6,7 @@ public class Pague3Leve4 extends Promocao{
     }
 
     public double desconto(int quantidade, double precoUni){
-        return precoUni * quantidade / 4;
+        return precoUni * (int)(quantidade / 4);
     }
 
     @Override

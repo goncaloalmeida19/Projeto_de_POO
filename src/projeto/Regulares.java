@@ -11,11 +11,11 @@ public class Regulares extends Cliente{
 
     @Override
     public String toString() {
-        return "\tNome: " + nome + '\n' +
+        return  "\tNome: " + nome + '\n' +
                 "\tMorada: " + morada + '\n' +
                 "\tEmail: "+ email + '\n' +
                 "\tTelefone: " + telefone + '\n' +
-                "\tData=" + Data + '\n';
+                "\tData: " + Data + '\n';
     }
 
     public void setters(String altera, int op, Data d){

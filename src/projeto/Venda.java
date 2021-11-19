@@ -34,21 +34,22 @@ public class Venda {
         Item i = contemProduto(produto);
         int stockAtual = produto.obterStockAtual(data, vendas);
         if(stockAtual == 0) return -1;
+
         if(i != null) {
-            if(stockAtual - quantidade < 0) {
+            if(stockAtual < quantidade) {
                 i.incrementarQuantidade(stockAtual);
                 return stockAtual;
             }
             else i.incrementarQuantidade(quantidade);
         }
         else {
-            if(stockAtual - quantidade < 0) {
+            if(stockAtual < quantidade) {
                 carrinho.add(new Item(produto, stockAtual));
                 return stockAtual;
             }
             else carrinho.add(new Item(produto, quantidade));
         }
-        return 1;
+        return -2;
     }
 
     public int removeCarrinho(Produto produto, int quantidade) {
@@ -83,10 +84,24 @@ public class Venda {
     }
 
     public double precoSemEnvio(){
-        double preco = 0;
+        double preco = 0.0;
         for(Item i: carrinho){
             preco += i.getProduto().obterPreco(i.getQuantidade(), data);
         }
         return preco;
+    }
+
+    @Override
+    public String toString() {
+        if(carrinho.size() == 0)  return  "Carrinho vazio.";
+        else{
+            String produtos = "";
+            for(Item item: carrinho){
+                Produto p = item.getProduto();
+                produtos = produtos.concat("\n\tProduto: " + p.getNome() + " Quantidade: " + item.getQuantidade()
+                        + " Valor: " + String.format("%.2f",p.getPrecoUni() * item.getQuantidade())+ "€");
+            }
+            return produtos;
+        }
     }
 }
