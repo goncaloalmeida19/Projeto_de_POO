@@ -53,4 +53,25 @@ public class CadeiaSupermercados {
         }
         return vendas;
     }
+
+    public boolean cartaoEValido(String numCartao, String dataValidade, String cVV, Data dataCompra){
+        int tamanho = numCartao.length();
+        if(tamanho != 19) return false;
+        for(int i = 0; i < cVV.length(); i++){
+            if(cVV.charAt(i) < '0' || cVV.charAt(i) > '9') return false;
+        }
+
+        String[] dataV = dataValidade.split("/");
+        Data dataFinal = new Data(1, Integer.parseInt(dataV[0]), Integer.parseInt(dataV[1]));
+        if(dataFinal.compareTo(dataCompra) < 0) return false;
+
+        for(int i = 0; i < numCartao.length(); i++){
+            if(!((((i + 1) % 5 == 0) && (numCartao.charAt(i) == ' ')) || ((numCartao.charAt(i) >= '0' && numCartao.charAt(i) <= '9')))) return false;
+        }
+        return true;
+    }
+
+    public boolean paypalEValido(String email, String emailCliente){
+        return email.equals(emailCliente);
+    }
 }
