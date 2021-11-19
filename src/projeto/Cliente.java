@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Cliente {
-    private final String nome;
-    private final String morada;
-    private final String email;
-    private final int telefone;
-    private final int Data;
+    protected String nome;
+    protected String morada;
+    protected String email;
+    protected int telefone;
+    protected Data Data;
     private List<Venda> vendas;
 
-    public Cliente(String nome, String morada, String email, int telefone, int data) {
+    public Cliente(String nome, String morada, String email, int telefone, Data data) {
         this.nome = nome;
         this.morada = morada;
         this.email = email;
@@ -36,12 +36,32 @@ public abstract class Cliente {
         return telefone;
     }
 
-    public int getData() {
+    public Data getData() {
         return Data;
     }
 
     public List<Venda> getVendas() {
         return vendas;
+    }
+
+    protected void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    protected void setMorada(String morada) {
+        this.morada = morada;
+    }
+
+    protected void setEmail(String email) {
+        this.email = email;
+    }
+
+    protected void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    protected void setData(Data data) {
+        Data = data;
     }
 
     /**
@@ -53,4 +73,9 @@ public abstract class Cliente {
     }
 
     public abstract double precoDeEnvio(double preco);
+
+    @Override
+    public abstract String toString();
+
+    public abstract void setters(String altera, int op, Data d);
 }

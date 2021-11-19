@@ -32,18 +32,23 @@ public class Venda {
     
     public int addCarrinho(Produto produto, int quantidade, List<Venda> vendas) {
         Item i = contemProduto(produto);
+        int stockAtual = produto.obterStockAtual(data, vendas);
+        if(stockAtual == 0) return -1;
         if(i != null) {
-            int stockAtual = produto.obterStockAtual(data, vendas);
-            if(stockAtual == 0) return -1;
-            else if(stockAtual - quantidade < 0) return 1;
-            i.incrementarQuantidade(quantidade);
-            return 1;
-
+            if(stockAtual - quantidade < 0) {
+                i.incrementarQuantidade(stockAtual);
+                return stockAtual;
+            }
+            else i.incrementarQuantidade(quantidade);
         }
         else {
-            carrinho.add(new Item(produto, quantidade));
-            return 1;
+            if(stockAtual - quantidade < 0) {
+                carrinho.add(new Item(produto, stockAtual));
+                return stockAtual;
+            }
+            else carrinho.add(new Item(produto, quantidade));
         }
+        return 1;
     }
 
     public int removeCarrinho(Produto produto, int quantidade) {
@@ -58,13 +63,12 @@ public class Venda {
     }
 
     public int obterQuantidade(Produto p){
-        int n = 0;
         for(Item i: carrinho){
             if(i.getProduto().igual(p)){
-                n++;
+                return i.getQuantidade();
             }
         }
-        return n;
+        return 0;
     }
 
     public double precoDeEnvioTotal(Cliente cliente, double preco) {
@@ -84,14 +88,5 @@ public class Venda {
             preco += i.getProduto().obterPreco(i.getQuantidade(), data);
         }
         return preco;
-    }
-
-    @Override
-    public String toString() {
-        String produtos = "";
-        for(Item item: carrinho){
-            produtos = produtos.concat("\n\tProduto: " + item.getProduto() + " Quantidade: " + item.getQuantidade());
-        }
-        return produtos;
     }
 }
