@@ -49,9 +49,24 @@ public class CadeiaSupermercados {
     public List<Compra> obterCompras(){
         List<Compra> compras = new ArrayList<>();
         for(Cliente c: clientes){
-            compras.addAll(c.getVendas());
+            compras.addAll(c.getCompras());
         }
         return compras;
+    }
+
+    public String obterCatalogo(List<Compra> compras, Compra c){
+        Data data = c.getData();
+        String catalogo = "";
+        for (Produto p : produtos) {
+            int stock = p.obterStockAtual(data, compras) - c.obterQuantidade(p);
+            if(stock < 0) stock = 0;
+
+            Promocao promo = p.obterPromocao(data);
+            catalogo = catalogo.concat("\t" + p.getNome() + " a " + p.getPrecoUni() + "€ (Stock: " + stock);
+            if(promo != null) catalogo = catalogo.concat(" Promoção: " + promo);
+            catalogo = catalogo.concat(")\n");
+        }
+        return catalogo;
     }
 
     public boolean cartaoEValido(String numCartao, String dataValidade, String cVV, Data dataCompra){

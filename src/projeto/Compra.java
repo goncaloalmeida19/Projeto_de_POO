@@ -31,7 +31,7 @@ public class Compra {
     }
 
     /**
-     *
+     * Adicionar um ‘item’ ao carrinho
      * @param produto produto a adicionar
      * @param quantidade quantidade do produto a adicionar
      * @param compras lista de compras

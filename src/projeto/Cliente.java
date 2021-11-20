@@ -8,15 +8,15 @@ public abstract class Cliente {
     protected String morada;
     protected String email;
     protected int telefone;
-    protected Data Data;
-    private List<Compra> compras;
+    protected Data dataNascimento;
+    private final List<Compra> compras;
 
-    public Cliente(String nome, String morada, String email, int telefone, Data data) {
+    public Cliente(String nome, String morada, String email, int telefone, Data dataNascimento) {
         this.nome = nome;
         this.morada = morada;
         this.email = email;
         this.telefone = telefone;
-        this.Data = data;
+        this.dataNascimento = dataNascimento;
         this.compras = new ArrayList<>();
     }
 
@@ -36,11 +36,11 @@ public abstract class Cliente {
         return telefone;
     }
 
-    public Data getData() {
-        return Data;
+    public Data getDataNascimento() {
+        return dataNascimento;
     }
 
-    public List<Compra> getVendas() {
+    public List<Compra> getCompras() {
         return compras;
     }
 
@@ -60,8 +60,8 @@ public abstract class Cliente {
         this.telefone = telefone;
     }
 
-    protected void setData(Data data) {
-        Data = data;
+    protected void setDataNascimento(Data dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class Cliente {
                 "\tMorada: " + morada + '\n' +
                 "\tEmail: "+ email + '\n' +
                 "\tTelefone: " + telefone + '\n' +
-                "\tData: " + Data + '\n';
+                "\tData: " + dataNascimento + '\n';
     }
 
     public void setters(String altera, int op){
