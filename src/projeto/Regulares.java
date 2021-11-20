@@ -8,6 +8,4 @@ public class Regulares extends Cliente{
     public double precoDeEnvio(double preco){
        return 20;
     }
-
-
 }
