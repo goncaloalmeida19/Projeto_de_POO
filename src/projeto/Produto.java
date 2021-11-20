@@ -63,16 +63,16 @@ public abstract class Produto {
      * @param v venda
      * @return quantidade desse produto na venda
      */
-    private int encontraNaVenda(Venda v){
+    private int encontraNaVenda(Compra v){
         for(Item i: v.getCarrinho())
             if(i.getProduto().igual(this))
                 return i.getQuantidade();
         return 0;
     }
     
-    public int obterStockAtual(Data d, List<Venda> vendas){
+    public int obterStockAtual(Data d, List<Compra> compras){
         int stockAtual = stockInicial;
-        for(Venda v: vendas)
+        for(Compra v: compras)
             if(d.compareTo(v.getData()) >= 0)
                 stockAtual -= encontraNaVenda(v);
         return stockAtual;

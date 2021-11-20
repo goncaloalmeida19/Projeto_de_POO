@@ -9,7 +9,7 @@ public abstract class Cliente {
     protected String email;
     protected int telefone;
     protected Data Data;
-    private List<Venda> vendas;
+    private List<Compra> compras;
 
     public Cliente(String nome, String morada, String email, int telefone, Data data) {
         this.nome = nome;
@@ -17,7 +17,7 @@ public abstract class Cliente {
         this.email = email;
         this.telefone = telefone;
         this.Data = data;
-        this.vendas = new ArrayList<>();
+        this.compras = new ArrayList<>();
     }
 
     public String getNome() {
@@ -40,8 +40,8 @@ public abstract class Cliente {
         return Data;
     }
 
-    public List<Venda> getVendas() {
-        return vendas;
+    public List<Compra> getVendas() {
+        return compras;
     }
 
     protected void setNome(String nome) {
@@ -68,14 +68,27 @@ public abstract class Cliente {
      * Adicionar à lista de vendas uma nova venda
      * @param v venda feita pelo cliente a que esta chamada de método está associada
      */
-    public void addVenda(Venda v){
-        vendas.add(v);
+    public void addVenda(Compra v){
+        compras.add(v);
     }
 
     public abstract double precoDeEnvio(double preco);
 
     @Override
-    public abstract String toString();
+    public String toString() {
+        return  "\tNome: " + nome + '\n' +
+                "\tMorada: " + morada + '\n' +
+                "\tEmail: "+ email + '\n' +
+                "\tTelefone: " + telefone + '\n' +
+                "\tData: " + Data + '\n';
+    }
 
-    public abstract void setters(String altera, int op, Data d);
+    public void setters(String altera, int op){
+        switch (op) {
+            case 1 -> setNome(altera);
+            case 2 -> setMorada(altera);
+            case 3 -> setEmail(altera);
+            case 4 -> setTelefone(Integer.parseInt(altera));
+        }
+    }
 }
