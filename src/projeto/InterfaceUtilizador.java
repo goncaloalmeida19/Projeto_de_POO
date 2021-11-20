@@ -3,8 +3,16 @@ package projeto;
 import java.util.List;
 import java.util.Scanner;
 
-public class Interface {
-    public String readString(Scanner scanner){
+public class InterfaceUtilizador {
+    private final CadeiaSupermercados cad;
+    private final Scanner scanner;
+
+    public InterfaceUtilizador(CadeiaSupermercados cad, Scanner scanner){
+        this.cad = cad;
+        this.scanner = scanner;
+    }
+
+    public String readString(){
         String s;
         do{
             s = scanner.nextLine();
@@ -12,8 +20,8 @@ public class Interface {
         return s;
     }
 
-    // Método que lê um inteiro e devolve-o sem erros, se um acontecer devolve -1 (sendo considerado erro neste programa)
-    public int readIntProtection(Scanner scanner){
+    // Método que lê um inteiro positivo e devolve-o sem erros, se um acontecer devolve -1 (sendo considerado erro neste programa)
+    public int readIntProtection(){
         if(scanner.hasNextInt()) return scanner.nextInt();
         else{
             scanner.nextLine();
@@ -22,18 +30,20 @@ public class Interface {
     }
 
     // Método que lê uma data e devolve-a, sendo null em caso de erro
-    public Data readData(Scanner scanner){
+    public Data readData(){
         Data d = null;
         while(d == null){
             System.out.println("\nData");
             int i = 0;
             int[] dat = new int[3];
             for (; i < 3; i++) {
-                if(i == 0) System.out.print("\tDia: ");
-                else if(i == 1) System.out.print("\tMês: ");
-                else System.out.print("\tAno: ");
+                switch (i) {
+                    case 0 -> System.out.print("\tDia: ");
+                    case 1 -> System.out.print("\tMês: ");
+                    default -> System.out.print("\tAno: ");
+                }
                 // Se o scanner ler um inteiro, guarda o valor na tabela
-                dat[i] = readIntProtection(scanner);
+                dat[i] = readIntProtection();
                 if(dat[i] < 0){
                     System.out.println("Número inválido.");
                     i--;
@@ -49,19 +59,19 @@ public class Interface {
     }
 
     public void imprimirComprasRealizadas(Cliente c, Data d){
-        List<Venda> vendas = c.getVendas();
-        if(vendas.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + d);
+        List<Compra> compras = c.getVendas();
+        if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + d);
         else{
             System.out.println("\nCompras realizadas até " + d + ":\n");
-            for(Venda v: c.getVendas()){
+            for(Compra v: c.getVendas()){
                 System.out.print("Venda do dia " + v.getData() + ":" + v);
             }
         }
     }
 
-    public void adicionarItemCarrinho(Scanner scanner, Venda v, List<Venda> vendas, CadeiaSupermercados cad){
+    public void adicionarItemCarrinho(Compra v, List<Compra> compras){
         System.out.print("Produto a adicionar: ");
-        String nomeProduto = readString(scanner);
+        String nomeProduto = readString();
         Produto produto = cad.obterProduto(nomeProduto);
 
         if(produto == null) System.out.println("Produto inválido");
@@ -74,25 +84,31 @@ public class Interface {
                 if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
             }while(quantidade <= 0);
 
-            int adiciona = v.addCarrinho(produto, quantidade, vendas);
+            int adiciona = v.addCarrinho(produto, quantidade, compras);
 
-            if(adiciona == -2) {
-                if(quantidade == 1) System.out.println(produto.getNome() + " adicionado ao carrinho.");
-                else System.out.println(quantidade + " " + produto.getNome() + " adicionados ao carrinho.");
+            switch (adiciona) {
+                case -2:
+                    if (quantidade == 1) System.out.println(produto.getNome() + " adicionado ao carrinho.");
+                    else System.out.println(quantidade + " " + produto.getNome() + " adicionados ao carrinho.");
+                    break;
+                case -1:
+                    System.out.println("Não existe stock para o produto requerido.");
+                    break;
+                default:
+                    System.out.println(adiciona + " " + produto.getNome() + " adicionados ao carrinho.");
+                    break;
             }
-            else if(adiciona == -1) System.out.println("Não existe stock para o produto requerido.");
-            else System.out.println(adiciona + " " + produto.getNome() + " adicionados ao carrinho.");
         }
     }
 
-    public void realizarCompra(Scanner scanner, Venda v, CadeiaSupermercados cad){
+    public void realizarCompra(Compra v){
         int op = 1;
-        List<Venda> vendas = cad.obterVendas();
+        List<Compra> compras = cad.obterCompras();
         while(op != 2) {
             System.out.println("\nCatálogo:");
             for (Produto p : cad.produtos) {
                 Data data = v.getData();
-                int stock = p.obterStockAtual(data, vendas) - v.obterQuantidade(p);
+                int stock = p.obterStockAtual(data, compras) - v.obterQuantidade(p);
                 if(stock < 0) stock = 0;
 
                 Promocao promo = p.obterPromocao(data);
@@ -102,17 +118,18 @@ public class Interface {
             }
             System.out.println("\n1. Adicionar produto do carrinho.\n2. Voltar para o menu de compra.");
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
-            if (op == 1) adicionarItemCarrinho(scanner, v, vendas, cad);
-            else {
-                if (op != 2) System.out.println("Opção inválida.");
+            op = readIntProtection();
+            switch(op){
+                case 1 -> adicionarItemCarrinho(v, compras);
+                case 2 -> {}
+                default -> System.out.println("Opção inválida.");
             }
         }
     }
 
-    public void removerItemCarrinho(Scanner scanner, Venda v, CadeiaSupermercados cad){
+    public void removerItemCarrinho(Compra v){
         System.out.print("Produto a remover: ");
-        String nomeProduto = readString(scanner);
+        String nomeProduto = readString();
         Produto produto = cad.obterProduto(nomeProduto);
         if(produto == null) System.out.println("Produto inválido");
         else{
@@ -124,19 +141,18 @@ public class Interface {
                 if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
             }while(quantidade <= 0);
 
-            int remove = v.removeCarrinho(produto, quantidade);
+            int remove = v.removerCarrinho(produto, quantidade);
             if(remove == 0) System.out.println("Produto inserido não está no carrinho.");
             // Se remover com sucesso ou o stock total, apresentar esta mensagem
             else System.out.println("Produto removido do carrinho.");
         }
     }
 
-    public void verCarrinho(Scanner scanner, Venda v, CadeiaSupermercados cad){
+    public void verCarrinho(Compra v){
         int op = 1;
         while(op != 3){
             List<Item> carrinho = v.getCarrinho();
             System.out.print("\nCarrinho: " + v);
-
             double preco = v.precoSemEnvio();
             System.out.println("\nPreço sem portes: " + String.format("%.2f",preco) + "\n");
 
@@ -146,27 +162,29 @@ public class Interface {
                     2. Remover todos os produtos do carrinho
                     3. Voltar para o menu de compra.""");
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
-            boolean validSize = carrinho.size() != 0;
-            if (op == 2 && validSize) v.clear();
-            else if(op == 1 && validSize) removerItemCarrinho(scanner, v, cad);
-            else {
-                if(op == 1 || op == 2) System.out.println("Não existem produtos para remover.");
-                else if (op != 3) System.out.println("Opção inválida.");
+            op = readIntProtection();
+
+            if(carrinho.size() == 0 && (op == 1 || op == 2)) System.out.println("Não existem produtos para remover.");
+            else{
+                switch (op) {
+                    case 1 -> removerItemCarrinho(v);
+                    case 2 -> v.clear();
+                    case 3 -> {}
+                    default -> System.out.println("Opção inválida.");
+                }
             }
         }
     }
 
-    public boolean printFinal(Venda v, Cliente cliente, CadeiaSupermercados cad){
+    public boolean printFinal(Compra v, Cliente cliente){
         cad.confirmaCompra(v, cliente);
         System.out.println("\nEncomenda enviada para " + cliente.getMorada() +
                            "em nome de " + cliente.getNome() +
-                           "\nObrigado por fazer compras com a SONAI, " +
-                           "a melhor cadeia de supermercados da Península Ibérica");
+                           "\nObrigado pela sua compra!");
         return true;
     }
 
-    public void alterarDados(Cliente c, Scanner scanner){
+    public void alterarDados(Cliente c){
         int op = -1;
         String[] alteracoes = {"Nome", "Morada", "Email", "Telemóvel", "Data de nascimento"};
         while(op != 6){
@@ -180,18 +198,16 @@ public class Interface {
                                 6. Continuar
                                 """);
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
-            Data d;
+            op = readIntProtection();
             if (op != 6) {
                 if(op >= 1 && op <= 5){
                     if(op != 5){
                         System.out.print(alteracoes[op - 1] + ": ");
-                        d = new Data(0, 0, 0);
+                        String altera = readString();
+                        c.setters(altera, op);
                     }
-                    else d = readData(scanner);
+                    else c.setData(readData());
 
-                    String altera = readString(scanner);
-                    c.setters(altera, op, d);
                     System.out.println("Os seus dados" + c);
                 }
                 else System.out.println("Opção inválida!");
@@ -199,60 +215,64 @@ public class Interface {
         }
     }
 
-    public boolean opcaoPagamento(Scanner scanner, Venda v, Cliente cliente, double precoFinal, CadeiaSupermercados cad){
+    public boolean opcaoPagamento(Compra v, Cliente cliente, double precoFinal){
         int op = -1;
         while(op != 3){
             System.out.println("\nPreço final a pagar: " + String.format("%.2f",precoFinal) + "€");
             System.out.println("\nMétodos de pagamento disponíveis:");
             System.out.println("\t1.Multibanco\n\t2.Paypal\n\t3.Voltar para o menu de pagamento");
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
+            op = readIntProtection();
 
-            if (op == 1) {
-                System.out.print("Número do cartão (XXXX XXXX XXXX XXXX): ");
-                String numCartao = readString(scanner);
-                System.out.print("Data de validade (MM/AA): ");
-                String dataValidade = readString(scanner);
-                System.out.print("CVV: ");
-                String cVV = readString(scanner);
-                if(cad.cartaoEValido(numCartao, dataValidade, cVV, v.getData())) return printFinal(v, cliente, cad);
-                else System.out.println("Cartão inválido");
-            }
-            else if(op == 2){
-                System.out.print("Email: ");
-                String email = readString(scanner);
-                if(cad.paypalEValido(email, cliente.getEmail())) return printFinal(v, cliente, cad);
-                else System.out.println("Email inválido.");
-            }
-            else{
-                if(op != 3) System.out.println("Opção inválida.");
+            switch (op) {
+                case 1 -> {
+                    System.out.print("Número do cartão (XXXX XXXX XXXX XXXX): ");
+                    String numCartao = readString();
+                    System.out.print("Data de validade (MM/AA): ");
+                    String dataValidade = readString();
+                    System.out.print("CVV: ");
+                    String cVV = readString();
+                    if (cad.cartaoEValido(numCartao, dataValidade, cVV, v.getData()))
+                        return printFinal(v, cliente);
+                    else System.out.println("Cartão inválido");
+                }
+                case 2 -> {
+                    System.out.print("Email: ");
+                    String email = readString();
+                    if (cad.paypalEValido(email, cliente.getEmail())) return printFinal(v, cliente);
+                    else System.out.println("Email inválido.");
+                }
+                case 3 -> {}
+                default -> System.out.println("Opção inválida.");
             }
         }
         return false;
     }
 
-    public boolean pagarCompra(Scanner scanner, Venda v, Cliente cliente, double precoFinal, CadeiaSupermercados cad){
+    public boolean pagarCompra(Compra v, Cliente cliente, double precoFinal){
         int op = -1;
         boolean comp = true;
         while(op != 2){
             System.out.println("\nOs seus dados estão corretos?:\n" + cliente);
             System.out.println("1. Sim\n2. Não");
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
-            if (op == 1) {
-                comp = opcaoPagamento(scanner, v, cliente, precoFinal, cad);
-                return comp;
+            op = readIntProtection();
+            switch (op) {
+                case 1 -> {
+                    comp = opcaoPagamento(v, cliente, precoFinal);
+                    return comp;
+                }
+                case 2 -> {
+                    alterarDados(cliente);
+                    comp = opcaoPagamento(v, cliente, precoFinal);
+                }
+                default -> System.out.println("Opção inválida.");
             }
-            else if (op == 2) {
-                alterarDados(cliente, scanner);
-                comp = opcaoPagamento(scanner, v, cliente, precoFinal, cad);
-            }
-            else System.out.println("Opção inválida.");
         }
         return comp;
     }
 
-    public void confirmarCompra(Scanner scanner, Venda v, Cliente cliente, CadeiaSupermercados cad){
+    public void confirmarCompra(Compra v, Cliente cliente){
         if(v.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
             System.out.println("\nCarrinho final:" + v);
@@ -265,20 +285,21 @@ public class Interface {
             while(op != 2){
                 System.out.println("1. Prosseguir com o pagamento.\n2. Voltar para o menu de compra.");
                 System.out.print("Opção: ");
-                op = readIntProtection(scanner);
-                if (op == 1) comp = pagarCompra(scanner, v, cliente, precoFinal, cad);
-                else {
-                    if (op != 2) System.out.println("Opção inválida.");
+                op = readIntProtection();
+                switch(op){
+                    case 1 -> comp = pagarCompra(v, cliente, precoFinal);
+                    case 2 -> {}
+                    default -> System.out.println("Opção inválida.");
                 }
                 System.out.println();
-                if(!comp) op = 2;
+                if(!comp) return;
             }
         }
     }
 
-    public void menuCompra(Data d, Scanner scanner, CadeiaSupermercados cad, Cliente c) {
+    public void menuCompra(Data d, Cliente c) {
         int op = -1;
-        Venda v = new Venda(d);
+        Compra v = new Compra(d);
         while(op != 4) {
             System.out.println("""
 
@@ -287,34 +308,32 @@ public class Interface {
                     3. Fazer pagamento.
                     4. Fechar menu de compra.""");
             System.out.print("Opção: ");
-            op = readIntProtection(scanner);
+            op = readIntProtection();
             switch (op) {
-                case 1 -> realizarCompra(scanner, v, cad);
-                case 2 -> verCarrinho(scanner, v, cad);
-                case 3 -> confirmarCompra(scanner, v, c, cad);
-                default -> {
-                    if (op != 4) System.out.println("Opção inválida.");
-                }
+                case 1 -> realizarCompra(v);
+                case 2 -> verCarrinho(v);
+                case 3 -> confirmarCompra(v, c);
+                case 4 -> {}
+                default -> System.out.println("Opção inválida.");
             }
         }
     }
 
-    public void menu(CadeiaSupermercados cad){
-        Scanner scanner = new Scanner(System.in);
-        int n = -1;
-        while (n != 2) {
-            if(n != -1) System.out.println(); // Espaçamento na consola para uma melhor leitura
+    public void menu(){
+        int op = -1;
+        while (op != 2) {
+            if(op != -1) System.out.println(); // Espaçamento na consola para uma melhor leitura
             System.out.print("1. Iniciar Sessão.\n2. Sair do Programa.\nOpção: ");
-            n = readIntProtection(scanner);
-            if (n == 1) {
+            op = readIntProtection();
+            if (op == 1) {
                 System.out.print("Email: ");
-                Cliente c = cad.contemEmail(readString(scanner));
+                Cliente c = cad.contemEmail(readString());
                 if(c == null) System.out.println("Email inválido.");
                 else {
                     System.out.printf("Login Válido...\n\nBom dia %s!\n", c.getNome());
-                    Data d = readData(scanner);
-                    int op = -1;
-                    while(op != 5) {
+                    Data d = readData();
+                    int op2 = -1;
+                    while(op2 != 5) {
                         System.out.println("""
 
                                 1. Realizar uma compra.
@@ -324,18 +343,19 @@ public class Interface {
                                 5. Terminar sessão.
                                 """);
                         System.out.print("Opção: ");
-                        op = readIntProtection(scanner);
-                        switch (op) {
-                            case 1 -> menuCompra(d, scanner, cad, c);
+                        op2 = readIntProtection();
+                        switch (op2) {
+                            case 1 -> menuCompra(d, c);
                             case 2 -> imprimirComprasRealizadas(c, d);
-                            case 3 -> alterarDados(c, scanner);
-                            case 4 -> d = readData(scanner);
-                            default -> {if (op != 5) System.out.println("Opção inválida.");}
+                            case 3 -> alterarDados(c);
+                            case 4 -> d = readData();
+                            case 5 -> {}
+                            default -> System.out.println("Opção inválida.");
                         }
                     }
                 }
             }
-            else if(n != 2) System.out.println("Opção inválida.");
+            else if(op != 2) System.out.println("Opção inválida.");
         }
     }
 }

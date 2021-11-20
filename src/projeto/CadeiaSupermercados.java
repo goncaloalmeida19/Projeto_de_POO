@@ -33,8 +33,8 @@ public class CadeiaSupermercados {
         return null;
     }
 
-    public void confirmaCompra(Venda venda, Cliente cliente){
-        cliente.addVenda(venda);
+    public void confirmaCompra(Compra compra, Cliente cliente){
+        cliente.addVenda(compra);
     }
 
     public Produto obterProduto(String nomeProduto){
@@ -46,12 +46,12 @@ public class CadeiaSupermercados {
         return null;
     }
 
-    public List<Venda> obterVendas(){
-        List<Venda> vendas = new ArrayList<>();
+    public List<Compra> obterCompras(){
+        List<Compra> compras = new ArrayList<>();
         for(Cliente c: clientes){
-            vendas.addAll(c.getVendas());
+            compras.addAll(c.getVendas());
         }
-        return vendas;
+        return compras;
     }
 
     public boolean cartaoEValido(String numCartao, String dataValidade, String cVV, Data dataCompra){
