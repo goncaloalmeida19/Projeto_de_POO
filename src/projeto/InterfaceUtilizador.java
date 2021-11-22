@@ -144,7 +144,7 @@ public class InterfaceUtilizador {
             List<Item> carrinho = compra.getCarrinho();
             System.out.print("\nCarrinho: " + compra);
             double preco = compra.precoSemEnvio();
-            System.out.println("\nPreço sem portes: " + String.format("%.2f",preco) + "€\n");
+            System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€\n");
 
             System.out.println("""
 
