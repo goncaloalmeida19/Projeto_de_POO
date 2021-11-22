@@ -144,7 +144,7 @@ public class InterfaceUtilizador {
             List<Item> carrinho = compra.getCarrinho();
             System.out.print("\nCarrinho: " + compra);
             double preco = compra.precoSemEnvio();
-            System.out.println("\nPreço sem portes: " + String.format("%.2f",preco) + "\n");
+            System.out.println("\nPreço sem portes: " + String.format("%.2f",preco) + "€\n");
 
             System.out.println("""
 
@@ -169,7 +169,7 @@ public class InterfaceUtilizador {
     public boolean printFinal(Compra compra, Cliente cliente){
         cad.confirmaCompra(compra, cliente);
         System.out.println("\nEncomenda enviada para " + cliente.getMorada() +
-                           "em nome de " + cliente.getNome() +
+                           " em nome de " + cliente.getNome() +
                            "\nObrigado por fazer compras com a SONAI, " +
                            "a melhor cadeia de supermercados da Península Ibérica");
         return true;

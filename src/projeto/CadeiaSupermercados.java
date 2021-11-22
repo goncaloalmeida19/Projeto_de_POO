@@ -56,7 +56,7 @@ public class CadeiaSupermercados {
 
     public String obterCatalogo(List<Compra> compras, Compra c){
         Data data = c.getData();
-        String catalogo = "";
+        String catalogo = "\n";
         for (Produto p : produtos) {
             int stock = p.obterStockAtual(data, compras) - c.obterQuantidade(p);
             if(stock < 0) stock = 0;
