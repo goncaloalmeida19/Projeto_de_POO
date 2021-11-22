@@ -81,7 +81,7 @@ public class CadeiaSupermercados {
         if(dataFinal.compareTo(dataCompra) < 0) return false;
 
         for(int i = 0; i < numCartao.length(); i++){
-            if(!((((i + 1) % 5 == 0) && (numCartao.charAt(i) == ' ')) || ((numCartao.charAt(i) >= '0' && numCartao.charAt(i) <= '9')))) return false;
+            if(!(((i + 1) % 5 == 0 && numCartao.charAt(i) == ' ') || (numCartao.charAt(i) >= '0' && numCartao.charAt(i) <= '9'))) return false;
         }
         return true;
     }
