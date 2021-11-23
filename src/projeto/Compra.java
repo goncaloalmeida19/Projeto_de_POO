@@ -106,7 +106,7 @@ public class Compra {
             for(Item item: carrinho){
                 Produto p = item.getProduto();
                 produtos = produtos.concat("\n\tProduto: " + p.getNome() + " Quantidade: " + item.getQuantidade()
-                        + " Valor: " + String.format("%.2f",p.getPrecoUni() * item.getQuantidade())+ "€");
+                        + " Valor (s/ Promoção): " + String.format("%.2f",p.getPrecoUni() * item.getQuantidade())+ "€");
             }
             return produtos;
         }
