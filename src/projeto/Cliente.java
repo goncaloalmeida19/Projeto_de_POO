@@ -76,11 +76,11 @@ public abstract class Cliente {
 
     @Override
     public String toString() {
-        return  "\tNome: " + nome + '\n' +
-                "\tMorada: " + morada + '\n' +
-                "\tEmail: "+ email + '\n' +
-                "\tTelefone: " + telefone + '\n' +
-                "\tData: " + dataNascimento + '\n';
+        return  "\tNome: " + nome +
+                "\n\tMorada: " + morada +
+                "\n\tEmail: "+ email +
+                "\n\tTelefone: " + telefone +
+                "\n\tData: " + dataNascimento + '\n';
     }
 
     public void setters(String altera, int op){
