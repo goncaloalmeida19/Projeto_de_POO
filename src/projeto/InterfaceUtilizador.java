@@ -141,9 +141,9 @@ public class InterfaceUtilizador {
         int op = 1;
         while(op != 3){
             List<Item> carrinho = compra.getCarrinho();
-            System.out.print("\nCarrinho: " + compra);
+            System.out.println("\nCarrinho: " + compra);
             double preco = compra.precoSemEnvio();
-            System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€\n");
+            System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
 
             System.out.println("""
 
@@ -205,41 +205,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public boolean opcaoPagamento(Compra compra, Cliente cliente, double precoFinal){
-        int op = -1;
-        while(op != 3){
-            System.out.println("\nPreço final a pagar: " + String.format("%.2f",precoFinal) + "€");
-            System.out.println("\nMétodos de pagamento disponíveis:");
-            System.out.println("\t1.Multibanco\n\t2.Paypal\n\t3.Voltar para o menu de pagamento");
-            System.out.print("Opção: ");
-            op = readIntProtection();
-
-            switch (op) {
-                case 1 -> {
-                    System.out.print("Número do cartão (XXXX XXXX XXXX XXXX): ");
-                    String numCartao = readString();
-                    System.out.print("Data de validade (MM/AA): ");
-                    String dataValidade = readString();
-                    System.out.print("CVV: ");
-                    String cVV = readString();
-                    if (cad.cartaoEValido(numCartao, dataValidade, cVV, compra.getData()))
-                        return printFinal(compra, cliente);
-                    else System.out.println("Cartão inválido");
-                }
-                case 2 -> {
-                    System.out.print("Email: ");
-                    String email = readString();
-                    if (cad.paypalEValido(email, cliente.getEmail())) return printFinal(compra, cliente);
-                    else System.out.println("Email inválido.");
-                }
-                case 3 -> {}
-                default -> System.out.println("Opção inválida.");
-            }
-        }
-        return false;
-    }
-
-    public boolean pagarCompra(Compra compra, Cliente cliente, double precoFinal){
+    public boolean pagarCompra(Compra compra, Cliente cliente){
         int op = -1;
         boolean comp = true;
         while(op != 2){
@@ -249,12 +215,12 @@ public class InterfaceUtilizador {
             op = readIntProtection();
             switch (op) {
                 case 1 -> {
-                    comp = opcaoPagamento(compra, cliente, precoFinal);
+                    comp = printFinal(compra, cliente);
                     return comp;
                 }
                 case 2 -> {
                     alterarDados(cliente);
-                    comp = opcaoPagamento(compra, cliente, precoFinal);
+                    comp = printFinal(compra, cliente);
                 }
                 default -> System.out.println("Opção inválida.");
             }
@@ -262,7 +228,7 @@ public class InterfaceUtilizador {
         return comp;
     }
 
-    public void confirmarCompra(Compra compra, Cliente cliente){
+    public boolean confirmarCompra(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
             System.out.println("\nCarrinho final:" + compra);
@@ -271,24 +237,26 @@ public class InterfaceUtilizador {
             double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
             System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
             int op = 1;
-            boolean comp = true;
+            boolean comp = false;
             while(op != 2){
-                System.out.println("1. Prosseguir com o pagamento.\n2. Voltar para o menu de compra.");
+                System.out.println("1. Prosseguir com a verificação de dados.\n2. Voltar para o menu de compra.");
                 System.out.print("Opção: ");
                 op = readIntProtection();
                 switch(op){
-                    case 1 -> comp = pagarCompra(compra, cliente, precoFinal);
+                    case 1 -> comp = pagarCompra(compra, cliente);
                     case 2 -> {}
                     default -> System.out.println("Opção inválida.");
                 }
                 System.out.println();
-                if(!comp) return;
+                if(comp) return true;
             }
         }
+        return false;
     }
 
     public void menuCompra(Data data, Cliente cliente) {
         int op = -1;
+        boolean comp;
         Compra c = new Compra(data);
         while(op != 4) {
             System.out.println("""
@@ -302,7 +270,10 @@ public class InterfaceUtilizador {
             switch (op) {
                 case 1 -> realizarCompra(c);
                 case 2 -> verCarrinho(c);
-                case 3 -> confirmarCompra(c, cliente);
+                case 3 -> {
+                    comp = confirmarCompra(c, cliente);
+                    if(comp) return;
+                }
                 case 4 -> {}
                 default -> System.out.println("Opção inválida.");
             }
@@ -328,7 +299,7 @@ public class InterfaceUtilizador {
 
                                 1. Realizar uma compra.
                                 2. Consultar as compras realizadas.
-                                3. Alterar dados pessoais
+                                3. Alterar dados pessoais.
                                 4. Mudar data atual.
                                 5. Terminar sessão.
                                 """);
