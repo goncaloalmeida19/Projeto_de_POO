@@ -32,14 +32,6 @@ public abstract class Cliente {
         return email;
     }
 
-    public int getTelefone() {
-        return telefone;
-    }
-
-    public Data getDataNascimento() {
-        return dataNascimento;
-    }
-
     public List<Compra> getCompras() {
         return compras;
     }

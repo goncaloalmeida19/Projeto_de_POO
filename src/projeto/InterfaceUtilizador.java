@@ -34,8 +34,9 @@ public class InterfaceUtilizador {
 
     // Método que lê uma data e devolve-a, sendo null em caso de erro
     public Data readData(){
-        Data d = null;
-        while(d == null){
+        Data d = new Data(0, 0 ,0);
+        boolean valido = true;
+        while(valido){
             System.out.println("\nData");
             int i = 0;
             int[] dat = new int[3];
@@ -52,11 +53,9 @@ public class InterfaceUtilizador {
                     i--;
                 }
             }
-            d = new Data(dat[0], dat[1], dat[2]);
-            if(!d.eValida()){
-                d = null;
-                System.out.println("Data inválida");
-            }
+            d.setData(dat[0], dat[1], dat[2]);
+            if(!d.eValida()) System.out.println("Data inválida");
+            else valido = false;
         }
         return d;
     }

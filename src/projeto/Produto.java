@@ -18,10 +18,6 @@ public abstract class Produto {
         this.stockInicial = stockInicial;
     }
 
-    public String getIdentificador() {
-        return identificador;
-    }
-
     public String getNome() {
         return nome;
     }
