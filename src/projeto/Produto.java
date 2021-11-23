@@ -55,7 +55,7 @@ public abstract class Produto {
     }
 
     public boolean igual(Produto p){
-        return identificador.equals(p.identificador) && nome.equals(p.nome);
+        return identificador.equals(p.identificador);
     }
     
     /**
