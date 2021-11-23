@@ -290,7 +290,7 @@ public class InterfaceUtilizador {
 
     public void menuCompra(Data data, Cliente cliente) {
         int op = -1;
-        Compra v = new Compra(data);
+        Compra c = new Compra(data);
         while(op != 4) {
             System.out.println("""
 
@@ -301,9 +301,9 @@ public class InterfaceUtilizador {
             System.out.print("Opção: ");
             op = readIntProtection();
             switch (op) {
-                case 1 -> realizarCompra(v);
-                case 2 -> verCarrinho(v);
-                case 3 -> confirmarCompra(v, cliente);
+                case 1 -> realizarCompra(c);
+                case 2 -> verCarrinho(c);
+                case 3 -> confirmarCompra(c, cliente);
                 case 4 -> {}
                 default -> System.out.println("Opção inválida.");
             }
