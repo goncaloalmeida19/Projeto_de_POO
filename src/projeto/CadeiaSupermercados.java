@@ -62,7 +62,7 @@ public class CadeiaSupermercados {
             if(stock < 0) stock = 0;
 
             Promocao promo = p.obterPromocao(data);
-            catalogo = catalogo.concat("\t" + p.getNome() + " a " + p.getPrecoUni() + "€ (Stock: " + stock);
+            catalogo = catalogo.concat(p + "€ (Stock: " + stock);
             if(promo != null) catalogo = catalogo.concat(" Promoção: " + promo);
             catalogo = catalogo.concat(")\n");
         }

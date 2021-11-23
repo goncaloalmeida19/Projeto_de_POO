@@ -79,4 +79,9 @@ public abstract class Produto {
     }
 
     public abstract double precoDeEnvio();
+
+    @Override
+    public String toString() {
+        return "\t" + nome + " a " + precoUni;
+    }
 }
