@@ -24,7 +24,7 @@ public class Data {
 
     public boolean eValida(){
         // Verificação dos limites habituais do ano, mês e dia
-        if(ano < 0 || ano > 2022 || mes < 1 || mes > 12 || dia < 1 || dia > 31) return false;
+        if(ano < 0 || mes < 1 || mes > 12 || dia < 1 || dia > 31) return false;
         // Verificação da exceção de fevereiro com ano bissexto
         if(mes == 2) {
             if(eBissexto(ano)) return dia <= 29;
