@@ -34,7 +34,7 @@ public class CadeiaSupermercados {
     }
 
     public void confirmaCompra(Compra compra, Cliente cliente){
-        cliente.addVenda(compra);
+        cliente.addCompra(compra);
     }
 
     public Produto obterProduto(String nomeProduto){
