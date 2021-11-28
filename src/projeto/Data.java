@@ -17,11 +17,20 @@ public class Data {
         this.ano = ano;
     }
 
-    // Retorna true se for bissexto e falso se não for
+    /**
+     * Verificar se um ano é bissexto ou não
+     * @param ano Ano de uma data
+     * @return true, se o ano for bissexto, e false, se não for bissexto
+     */
     private boolean eBissexto(int ano){
         return (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0));
     }
 
+
+    /**
+     * Verificar se a data que chama o método é válida ou não
+     * @return true, se a data que chama o método for válida, e false, se for inválida
+     */
     public boolean eValida(){
         // Verificação dos limites habituais do ano, mês e dia
         if(ano < 0 || mes < 1 || mes > 12 || dia < 1 || dia > 31) return false;
