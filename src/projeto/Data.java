@@ -11,6 +11,12 @@ public class Data {
         this.ano = ano;
     }
 
+    /**
+     * Alterar os valores de uma data
+     * @param dia dia de uma data
+     * @param mes mês de uma data
+     * @param ano ano de uma data
+     */
     public void setData(int dia, int mes, int ano){
         this.dia = dia;
         this.mes = mes;
@@ -19,7 +25,7 @@ public class Data {
 
     /**
      * Verificar se um ano é bissexto ou não
-     * @param ano Ano de uma data
+     * @param ano ano de uma data
      * @return true, se o ano for bissexto, e false, se não for bissexto
      */
     private boolean eBissexto(int ano){
