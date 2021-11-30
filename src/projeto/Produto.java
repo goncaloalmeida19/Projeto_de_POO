@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Produto {
-    private final String identificador;
-    private final String nome;
-    private final double precoUni;
+    protected final String identificador;
+    protected final String nome;
+    protected final double precoUni;
     private final List<Promocao> promocoes;
     private final int stockInicial;
 
@@ -77,7 +77,5 @@ public abstract class Produto {
     public abstract double precoDeEnvio();
 
     @Override
-    public String toString() {
-        return "\t" + nome + " a " + precoUni;
-    }
+    public abstract String toString();
 }

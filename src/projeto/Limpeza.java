@@ -8,11 +8,13 @@ public class Limpeza extends Produto{
         this.toxicidade = toxicidade;
     }
 
-    public int getToxicidade() {
-        return toxicidade;
-    }
-
     public double precoDeEnvio(){
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n" + "\t\tGrau de toxidade: "
+                + toxicidade + "\n\t\tPreço Unitário: " + precoUni;
     }
 }

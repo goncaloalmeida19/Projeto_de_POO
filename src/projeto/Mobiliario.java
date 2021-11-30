@@ -10,16 +10,14 @@ public class Mobiliario extends Produto{
         this.dim = dim;
     }
 
-    public int getPeso() {
-        return peso;
-    }
-
-    public Dimensao getDim() {
-        return dim;
-    }
-
     public double precoDeEnvio(){
         if(peso > 15) return 10;
         else return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n" + "\t\tPeso: "
+                + peso + "kg\n" + "\t\tDimensão: " + dim + "\n\t\tPreço Unitário: " + precoUni;
     }
 }

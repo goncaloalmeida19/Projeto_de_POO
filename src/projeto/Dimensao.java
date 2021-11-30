@@ -11,15 +11,10 @@ public class Dimensao {
         this.profundidade = profundidade;
     }
 
-    public double getAltura() {
-        return altura;
-    }
-
-    public double getLargura() {
-        return largura;
-    }
-
-    public double getProfundidade() {
-        return profundidade;
+    @Override
+    public String toString() {
+        return "Altura: " + altura +
+                "m / Largura: " + largura +
+                "m / Profundidade: " + profundidade + "m";
     }
 }

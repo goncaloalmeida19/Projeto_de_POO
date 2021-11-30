@@ -10,15 +10,13 @@ public class Alimentar extends Produto{
         this.gordura = gordura;
     }
 
-    public int getCalorias() {
-        return calorias;
-    }
-
-    public double getGordura() {
-        return gordura;
-    }
-
     public double precoDeEnvio(){
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n" + "\t\tCalorias: "
+                + calorias + "kcal\n" + "\t\tGordura: " + gordura + "kg\n\t\tPreço Unitário: " + precoUni;
     }
 }
