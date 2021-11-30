@@ -66,7 +66,7 @@ public class InterfaceUtilizador {
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
             for(Compra v: cliente.getCompras()){
-                System.out.print("\nCompra do dia " + v.getData() + ":" + v);
+                System.out.println("Compra do dia " + v.getData() + ":" + v);
             }
         }
     }
@@ -139,30 +139,37 @@ public class InterfaceUtilizador {
     }
 
     private void verCarrinho(Compra compra, Cliente cliente){
+        if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
+        else{
         int op = 1;
         while(op != 3){
             List<Item> carrinho = compra.getCarrinho();
             System.out.println("\nCarrinho: " + compra);
-            double preco = compra.precoSemEnvio();
-            System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
-            double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-            System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€");
+                double preco = compra.precoSemEnvio();
+                System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
+                double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
+                System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€");
 
-            System.out.println("""
+                System.out.println("""
+    
+                        1. Remover produto do carrinho.
+                        2. Remover todos os produtos do carrinho
+                        3. Voltar para o menu de compra.""");
+                System.out.print("Opção: ");
+                op = readIntProtection();
 
-                    1. Remover produto do carrinho.
-                    2. Remover todos os produtos do carrinho
-                    3. Voltar para o menu de compra.""");
-            System.out.print("Opção: ");
-            op = readIntProtection();
-
-            if(carrinho.size() == 0 && (op == 1 || op == 2)) System.out.println("Não existem produtos para remover.");
-            else{
-                switch (op) {
-                    case 1 -> removerItemCarrinho(compra);
-                    case 2 -> compra.clear();
-                    case 3 -> {}
-                    default -> System.out.println("Opção inválida.");
+                if(carrinho.size() == 0 && (op == 1 || op == 2)) System.out.println("Não existem produtos para remover.");
+                else{
+                    switch (op) {
+                        case 1 -> removerItemCarrinho(compra);
+                        case 2 -> {
+                            compra.clear();
+                            System.out.println("O carrinho encontra-se vazio.");
+                            op = 3;
+                        }
+                        case 3 -> {}
+                        default -> System.out.println("Opção inválida.");
+                    }
                 }
             }
         }
@@ -188,7 +195,7 @@ public class InterfaceUtilizador {
             int op = 1;
             boolean comp = false;
             while(op != 2){
-                System.out.println("1. Prosseguir com a verificação de dados.\n2. Voltar para o menu de compra.");
+                System.out.println("1. Confirmar a compra.\n2. Voltar para o menu de compra.");
                 System.out.print("Opção: ");
                 op = readIntProtection();
                 switch(op){
@@ -243,7 +250,7 @@ public class InterfaceUtilizador {
                     System.out.printf("Login Válido...\n\nBom dia %s!\n", c.getNome());
                     Data d = readData();
                     int op2 = -1;
-                    while(op2 != 5) {
+                    while(op2 != 4) {
                         System.out.println("""
 
                                 1. Realizar uma compra.
