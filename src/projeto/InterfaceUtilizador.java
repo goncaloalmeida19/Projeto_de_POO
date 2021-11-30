@@ -106,7 +106,7 @@ public class InterfaceUtilizador {
         while(op != 2) {
             String catalogo = cad.obterCatalogo(compras, compra);
             System.out.println("\nCatálogo:" + catalogo);
-            System.out.println("\n1. Adicionar produto do carrinho.\n2. Voltar para o menu de compra.");
+            System.out.println("1. Adicionar produto ao carrinho.\n2. Voltar para o menu de compra.");
             System.out.print("Opção: ");
             op = readIntProtection();
             switch(op){
