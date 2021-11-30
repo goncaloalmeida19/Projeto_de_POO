@@ -7,7 +7,14 @@ public class PagueMenos extends Promocao{
     }
 
     public double desconto(int quantidade, double precoUni){
-        return precoUni * 0.05 * (quantidade - 1);
+        double desc = 0;
+        for (int i = 0; i < quantidade; i++) {
+            if(i*0.05 < 0.5) //verificar se o desconto é inferior a 50%
+                desc += precoUni * i*0.05;
+            else
+                desc += precoUni * 0.5;
+        }
+        return desc;
     }
 
     @Override

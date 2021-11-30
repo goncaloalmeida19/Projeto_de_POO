@@ -12,7 +12,7 @@ public class InterfaceUtilizador {
         this.scanner = scanner;
     }
 
-    public String readString(){
+    private String readString(){
         String s;
         do{
             s = scanner.nextLine();
@@ -21,7 +21,7 @@ public class InterfaceUtilizador {
     }
 
     // Método que lê um inteiro positivo e devolve-o sem erros, se um acontecer devolve -1 (sendo considerado erro neste programa)
-    public int readIntProtection(){
+    private int readIntProtection(){
         if(scanner.hasNextInt()){
             int i = scanner.nextInt();
             return i <= 0 ? -1 : i;
@@ -33,7 +33,7 @@ public class InterfaceUtilizador {
     }
 
     // Método que lê uma data e devolve-a, sendo null em caso de erro
-    public Data readData(){
+    private Data readData(){
         Data d = new Data(0, 0 ,0);
         boolean valido = true;
         while(valido){
@@ -60,7 +60,7 @@ public class InterfaceUtilizador {
         return d;
     }
 
-    public void imprimirComprasRealizadas(Cliente cliente, Data data){
+    private void imprimirComprasRealizadas(Cliente cliente, Data data){
         List<Compra> compras = cliente.getCompras();
         if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + data);
         else{
@@ -71,7 +71,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public void adicionarItemCarrinho(Compra compra, List<Compra> compras){
+    private void adicionarItemCarrinho(Compra compra, List<Compra> compras){
         System.out.print("Produto a adicionar: ");
         String nomeProduto = readString();
         Produto produto = cad.obterProduto(nomeProduto);
@@ -100,7 +100,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public void realizarCompra(Compra compra){
+    private void realizarCompra(Compra compra){
         int op = 1;
         List<Compra> compras = cad.obterCompras();
         while(op != 2) {
@@ -117,7 +117,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public void removerItemCarrinho(Compra compra){
+    private void removerItemCarrinho(Compra compra){
         System.out.print("Produto a remover: ");
         String nomeProduto = readString();
         Produto produto = cad.obterProduto(nomeProduto);
@@ -138,7 +138,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public void verCarrinho(Compra compra, Cliente cliente){
+    private void verCarrinho(Compra compra, Cliente cliente){
         int op = 1;
         while(op != 3){
             List<Item> carrinho = compra.getCarrinho();
@@ -168,7 +168,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public boolean printFinal(Compra compra, Cliente cliente){
+    private boolean printFinal(Compra compra, Cliente cliente){
         cad.confirmaCompra(compra, cliente);
         System.out.println("\nEncomenda enviada para " + cliente.getMorada() +
                            " em nome de " + cliente.getNome() +
@@ -177,7 +177,16 @@ public class InterfaceUtilizador {
         return true;
     }
 
-    public void alterarDados(Cliente cliente){
+    private void setters(Cliente cliente, String altera, int op){
+        switch (op) {
+            case 1 -> cliente.setNome(altera);
+            case 2 -> cliente.setMorada(altera);
+            case 3 -> cliente.setEmail(altera);
+            case 4 -> cliente.setTelefone(Integer.parseInt(altera));
+        }
+    }
+
+    private void alterarDados(Cliente cliente){
         int op = -1;
         String[] alteracoes = {"Nome", "Morada", "Email", "Telemóvel", "Data de nascimento"};
         while(op != 6){
@@ -197,7 +206,7 @@ public class InterfaceUtilizador {
                     if(op != 5){
                         System.out.print(alteracoes[op - 1] + ": ");
                         String altera = readString();
-                        cliente.setters(altera, op);
+                        setters(cliente, altera, op);
                     }
                     else cliente.setDataNascimento(readData());
 
@@ -208,7 +217,7 @@ public class InterfaceUtilizador {
         }
     }
 
-    public boolean pagarCompra(Compra compra, Cliente cliente){
+    private boolean pagarCompra(Compra compra, Cliente cliente){
         int op = -1;
         boolean comp = true;
         while(op != 2){
@@ -231,7 +240,7 @@ public class InterfaceUtilizador {
         return comp;
     }
 
-    public boolean confirmarCompra(Compra compra, Cliente cliente){
+    private boolean confirmarCompra(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
             System.out.println("\nCarrinho final:" + compra);
@@ -257,7 +266,7 @@ public class InterfaceUtilizador {
         return false;
     }
 
-    public void menuCompra(Data data, Cliente cliente) {
+    private void menuCompra(Data data, Cliente cliente) {
         int op = -1;
         boolean comp;
         Compra compra = new Compra(data);
