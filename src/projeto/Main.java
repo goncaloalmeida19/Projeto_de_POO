@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        CadeiaSupermercados cad = new CadeiaSupermercados();
-        Scanner scanner = new Scanner(System.in);
-        InterfaceUtilizador i = new InterfaceUtilizador(cad, scanner);
+        InterfaceUtilizador i = new InterfaceUtilizador();
         i.menu();
     }
 }
