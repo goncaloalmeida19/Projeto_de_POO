@@ -35,19 +35,15 @@ public class Compra {
      * @param produto produto a adicionar
      * @param quantidade quantidade do produto a adicionar
      * @param compras lista de compras
-     * @return -2 se correr tudo bem, -1 se não houver stock, ou retorna o stock atual se a quantidade for maior
+     * @return -2 se correr tudo bem, -1 se não houver stock, ou retorna o stock atual se o mesmo for inferior à quantidade atual
      * que o stock existente
      */
     public int addCarrinho(Produto produto, int quantidade, List<Compra> compras) {
         Item i = contemProduto(produto);
         int stockAtual = produto.obterStockAtual(data, compras);
         if(stockAtual == 0) return -1;
+        if(stockAtual < quantidade) return stockAtual;
 
-        if(stockAtual < quantidade) {
-            if(i != null) i.incrementarQuantidade(stockAtual);
-            else carrinho.add(new Item(produto, stockAtual));
-            return stockAtual;
-        }
         if(i != null) i.incrementarQuantidade(quantidade);
         else carrinho.add(new Item(produto, quantidade));
         return -2;

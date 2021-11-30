@@ -94,7 +94,8 @@ public class InterfaceUtilizador {
                     if (quantidade == 1) System.out.println(produto.getNome() + " adicionado ao carrinho.");
                     else System.out.println(quantidade + " " + produto.getNome() + " adicionados ao carrinho.");
                 }
-                default -> System.out.println(adiciona + " " + produto.getNome() + " adicionados ao carrinho.");
+                default -> System.out.printf("A quantidade requerida é inferior à disponível. " +
+                        "(Quantidade disponível: %d)\n", adiciona);
             }
         }
     }
@@ -137,13 +138,15 @@ public class InterfaceUtilizador {
         }
     }
 
-    public void verCarrinho(Compra compra){
+    public void verCarrinho(Compra compra, Cliente cliente){
         int op = 1;
         while(op != 3){
             List<Item> carrinho = compra.getCarrinho();
             System.out.println("\nCarrinho: " + compra);
             double preco = compra.precoSemEnvio();
             System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
+            double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
+            System.out.println("\nPreço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
 
             System.out.println("""
 
@@ -257,7 +260,7 @@ public class InterfaceUtilizador {
     public void menuCompra(Data data, Cliente cliente) {
         int op = -1;
         boolean comp;
-        Compra c = new Compra(data);
+        Compra compra = new Compra(data);
         while(op != 4) {
             System.out.println("""
 
@@ -268,10 +271,10 @@ public class InterfaceUtilizador {
             System.out.print("Opção: ");
             op = readIntProtection();
             switch (op) {
-                case 1 -> realizarCompra(c);
-                case 2 -> verCarrinho(c);
+                case 1 -> realizarCompra(compra);
+                case 2 -> verCarrinho(compra, cliente);
                 case 3 -> {
-                    comp = confirmarCompra(c, cliente);
+                    comp = confirmarCompra(compra, cliente);
                     if(comp) return;
                 }
                 case 4 -> {}
