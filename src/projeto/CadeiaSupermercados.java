@@ -11,8 +11,8 @@ public class CadeiaSupermercados {
         this.clientes = new ArrayList<>();
 
         //APAGAR ISTO ANTES DE SUBMETER
-        clientes.add(new Regulares("nome", "morada", "email", 123456789, new Data(1, 1, 1)));
-        clientes.add(new Frequentes("n", "m", "e", 987654321, new Data(2, 2, 2)));
+        clientes.add(new Regular("nome", "morada", "email", 123456789, new Data(1, 1, 1)));
+        clientes.add(new Frequente("n", "m", "e", 987654321, new Data(2, 2, 2)));
 
         this.produtos = new ArrayList<>();
 
