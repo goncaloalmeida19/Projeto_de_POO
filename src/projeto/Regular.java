@@ -1,7 +1,7 @@
 package projeto;
 
-public class Regulares extends Cliente{
-    public Regulares(String nome, String morada, String email, int telefone, Data data) {
+public class Regular extends Cliente{
+    public Regular(String nome, String morada, String email, int telefone, Data data) {
         super(nome, morada, email, telefone, data);
     }
 

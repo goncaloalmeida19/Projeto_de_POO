@@ -1,7 +1,7 @@
 package projeto;
 
-public class Frequentes extends Cliente{
-    public Frequentes(String nome, String morada, String email, int telefone, Data data) {
+public class Frequente extends Cliente{
+    public Frequente(String nome, String morada, String email, int telefone, Data data) {
         super(nome, morada, email, telefone, data);
     }
 
