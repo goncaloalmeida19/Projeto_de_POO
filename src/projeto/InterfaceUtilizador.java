@@ -66,7 +66,7 @@ public class InterfaceUtilizador {
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
             for(Compra v: cliente.getCompras()){
-                System.out.print("Venda do dia " + v.getData() + ":" + v);
+                System.out.print("\nCompra do dia " + v.getData() + ":" + v);
             }
         }
     }
@@ -146,7 +146,7 @@ public class InterfaceUtilizador {
             double preco = compra.precoSemEnvio();
             System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
             double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-            System.out.println("\nPreço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+            System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€");
 
             System.out.println("""
 
@@ -177,69 +177,6 @@ public class InterfaceUtilizador {
         return true;
     }
 
-    private void setters(Cliente cliente, String altera, int op){
-        switch (op) {
-            case 1 -> cliente.setNome(altera);
-            case 2 -> cliente.setMorada(altera);
-            case 3 -> cliente.setEmail(altera);
-            case 4 -> cliente.setTelefone(Integer.parseInt(altera));
-        }
-    }
-
-    private void alterarDados(Cliente cliente){
-        int op = -1;
-        String[] alteracoes = {"Nome", "Morada", "Email", "Telemóvel", "Data de nascimento"};
-        while(op != 6){
-            System.out.println("""
-
-                                1. Alterar nome.
-                                2. Alterar morada.
-                                3. Alterar email.
-                                4. Alterar telemóvel.
-                                5. Alterar data de nascimento.
-                                6. Continuar
-                                """);
-            System.out.print("Opção: ");
-            op = readIntProtection();
-            if (op != 6) {
-                if(op >= 1 && op <= 5){
-                    if(op != 5){
-                        System.out.print(alteracoes[op - 1] + ": ");
-                        String altera = readString();
-                        setters(cliente, altera, op);
-                    }
-                    else cliente.setDataNascimento(readData());
-
-                    System.out.println("Os seus dados" + cliente);
-                }
-                else System.out.println("Opção inválida!");
-            }
-        }
-    }
-
-    private boolean pagarCompra(Compra compra, Cliente cliente){
-        int op = -1;
-        boolean comp = true;
-        while(op != 2){
-            System.out.println("\nOs seus dados estão corretos?:\n" + cliente);
-            System.out.println("1. Sim\n2. Não");
-            System.out.print("Opção: ");
-            op = readIntProtection();
-            switch (op) {
-                case 1 -> {
-                    comp = printFinal(compra, cliente);
-                    return comp;
-                }
-                case 2 -> {
-                    alterarDados(cliente);
-                    comp = printFinal(compra, cliente);
-                }
-                default -> System.out.println("Opção inválida.");
-            }
-        }
-        return comp;
-    }
-
     private boolean confirmarCompra(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
@@ -255,7 +192,7 @@ public class InterfaceUtilizador {
                 System.out.print("Opção: ");
                 op = readIntProtection();
                 switch(op){
-                    case 1 -> comp = pagarCompra(compra, cliente);
+                    case 1 -> comp = printFinal(compra, cliente);
                     case 2 -> {}
                     default -> System.out.println("Opção inválida.");
                 }
@@ -311,18 +248,16 @@ public class InterfaceUtilizador {
 
                                 1. Realizar uma compra.
                                 2. Consultar as compras realizadas.
-                                3. Alterar dados pessoais.
-                                4. Mudar data atual.
-                                5. Terminar sessão.
+                                3. Mudar data atual.
+                                4. Terminar sessão.
                                 """);
                         System.out.print("Opção: ");
                         op2 = readIntProtection();
                         switch (op2) {
                             case 1 -> menuCompra(d, c);
                             case 2 -> imprimirComprasRealizadas(c, d);
-                            case 3 -> alterarDados(c);
-                            case 4 -> d = readData();
-                            case 5 -> {}
+                            case 3 -> d = readData();
+                            case 4 -> {}
                             default -> System.out.println("Opção inválida.");
                         }
                     }
