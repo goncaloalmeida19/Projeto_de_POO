@@ -16,7 +16,7 @@ public class Alimentar extends Produto{
 
     @Override
     public String toString() {
-        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n" + "\t\tCalorias: "
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n\t\tCalorias: "
                 + calorias + "kcal\n" + "\t\tGordura: " + gordura + "kg\n\t\tPreço Unitário: " + precoUni;
     }
 }
