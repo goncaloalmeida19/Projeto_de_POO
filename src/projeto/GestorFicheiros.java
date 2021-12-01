@@ -114,7 +114,7 @@ public class GestorFicheiros {
                 ois.close();
                 return produtos;
             } else{
-                f = new File(fProdutos + ".obj");
+                f = new File(fProdutos + ".txt");
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);
                 String l;
