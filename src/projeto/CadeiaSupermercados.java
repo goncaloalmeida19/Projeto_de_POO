@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CadeiaSupermercados {
-    List<Cliente> clientes;
-    List<Produto> produtos;
+    private List<Cliente> clientes;
+    private List<Produto> produtos;
 
     public CadeiaSupermercados() {
         this.clientes = new ArrayList<>();
@@ -22,6 +22,22 @@ public class CadeiaSupermercados {
         produtos.add(new Mobiliario("i", "n", 10, 2, new Dimensao(1,1,1), 4));
         produtos.get(0).addPromocoes(new Pague3Leve4(new Data(3, 4, 4), new Data(7, 4, 4)));
         produtos.get(2).addPromocoes(new PagueMenos(new Data(3, 4, 4), new Data(9, 4, 4)));
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public Cliente contemEmail(String email){
