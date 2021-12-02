@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class InterfaceUtilizador {
     private final CadeiaSupermercados cad;
     private final Scanner scanner;
+    private final GestorFicheiros gf;
 
-    public InterfaceUtilizador(CadeiaSupermercados cad){
+    public InterfaceUtilizador(CadeiaSupermercados cad, GestorFicheiros gf){
         this.cad = cad;
         scanner = new Scanner(System.in);
+        this.gf = gf;
     }
 
     private String readString(){
@@ -228,7 +230,10 @@ public class InterfaceUtilizador {
                 case 2 -> verCarrinho(compra, cliente);
                 case 3 -> {
                     comp = confirmarCompra(compra, cliente);
-                    if(comp) return;
+                    if(comp) {
+                        gf.escreverCadSup(cad);
+                        return;
+                    }
                 }
                 case 4 -> {}
                 default -> System.out.println("Opção inválida.");
