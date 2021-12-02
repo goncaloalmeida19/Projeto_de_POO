@@ -7,8 +7,8 @@ public class InterfaceUtilizador {
     private final CadeiaSupermercados cad;
     private final Scanner scanner;
 
-    public InterfaceUtilizador(){
-        cad = new CadeiaSupermercados();
+    public InterfaceUtilizador(CadeiaSupermercados cad){
+        this.cad = cad;
         scanner = new Scanner(System.in);
     }
 
