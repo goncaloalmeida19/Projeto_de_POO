@@ -31,21 +31,40 @@ public class Compra {
     }
 
     /**
+     * Verifica se o stock atual é suficiente para a quantidade pedida do produto
+     * @param stockAtual stock atual do produto
+     * @param quantidade quantidade pedida do produto
+     * @return -2 se o stock atual for suficiente, -1 se este for 0, ou retorna o mesmo se for
+     * inferior à quantidade pedida
+     */
+    private int stockAtualSuficiente(int stockAtual, int quantidade){
+        if(stockAtual == 0) return -1;
+        if(stockAtual < quantidade) return stockAtual;
+        return -2;
+    }
+
+    /**
      * Adicionar um ‘item’ ao carrinho
      * @param produto produto a adicionar
      * @param quantidade quantidade do produto a adicionar
      * @param compras lista de compras
-     * @return -2 se correr tudo bem, -1 se não houver stock, ou retorna o stock atual se o mesmo for inferior à quantidade atual
-     * que o stock existente
+     * @return -2 se correr tudo bem, -1 se não houver stock, ou retorna o stock atual se este for inferior
+     * à quantidade pedida
      */
     public int addCarrinho(Produto produto, int quantidade, List<Compra> compras) {
         Item i = contemProduto(produto);
         int stockAtual = produto.obterStockAtual(data, compras);
-        if(stockAtual == 0) return -1;
-        if(stockAtual < quantidade) return stockAtual;
-
-        if(i != null) i.incrementarQuantidade(quantidade);
-        else carrinho.add(new Item(produto, quantidade));
+        if(i == null){
+            //item ainda não existe no carrinho
+            stockAtual = stockAtualSuficiente(stockAtual, quantidade);
+            if(stockAtual > -2) return stockAtual;
+            carrinho.add(new Item(produto, quantidade));
+        } else{
+            //item já existe no carrinho
+            stockAtual = stockAtualSuficiente(stockAtual - i.getQuantidade(), quantidade);
+            if(stockAtual > -2) return stockAtual;
+            i.incrementarQuantidade(quantidade);
+        }
         return -2;
     }
 
