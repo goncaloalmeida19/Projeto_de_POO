@@ -143,8 +143,8 @@ public class GestorFicheiros {
                     System.out.println("Produto não encontrado no ficheiro " + fPromocoes + " na linha " + linha_erro);
                     return null;
                 }
-                return produtos;
             }
+            return produtos;
 
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fPromocoes);
