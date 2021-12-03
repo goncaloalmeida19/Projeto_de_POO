@@ -8,20 +8,6 @@ public class CadeiaSupermercados {
     private List<Produto> produtos;
 
     public CadeiaSupermercados() {
-        this.clientes = new ArrayList<>();
-
-        //APAGAR ISTO ANTES DE SUBMETER
-        clientes.add(new Regular("nome", "morada", "email", 123456789, new Data(1, 1, 1)));
-        clientes.add(new Frequente("n", "m", "e", 987654321, new Data(2, 2, 2)));
-
-        this.produtos = new ArrayList<>();
-
-        //APAGAR ISTO ANTES DE SUBMETER
-        produtos.add(new Alimentar("identifcador", "nome", 1.1, 2, 3.1, 7));
-        produtos.add(new Limpeza("identif", "no", 1.1, 2, 2));
-        produtos.add(new Mobiliario("i", "n", 10, 2, new Dimensao(1,1,1), 4));
-        produtos.get(0).addPromocoes(new Pague3Leve4(new Data(3, 4, 4), new Data(7, 4, 4)));
-        produtos.get(2).addPromocoes(new PagueMenos(new Data(3, 4, 4), new Data(9, 4, 4)));
     }
 
     public List<Cliente> getClientes() {
