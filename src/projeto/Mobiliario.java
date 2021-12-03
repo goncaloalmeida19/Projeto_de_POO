@@ -3,7 +3,7 @@ package projeto;
 /**
  * Classe que contém um produto de mobiliário.
  * Carateriza-se com o peso e dimensão do produto
- * além dos atributos que um produto já possui
+ * além dos atributos que um produto já possui.
  */
 public class Mobiliario extends Produto{
     private final int peso;

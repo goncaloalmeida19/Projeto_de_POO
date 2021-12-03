@@ -3,7 +3,7 @@ package projeto;
 /**
  * Classe que contém um produto de limpeza.
  * Carateriza-se com o grau de toxidade do produto
- * além dos atributos que um produto já possui
+ * além dos atributos que um produto já possui.
  */
 public class Limpeza extends Produto{
     private final int toxicidade;

@@ -3,7 +3,7 @@ package projeto;
 /**
  * Classe que contém um produto alimentar.
  * Carateriza-se com o número calorias e gordura do produto
- * além dos atributos que um produto já possui
+ * além dos atributos que um produto já possui.
  */
 public class Alimentar extends Produto{
     private final int calorias;
