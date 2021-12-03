@@ -2,6 +2,7 @@ package projeto;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GestorFicheiros {
@@ -9,10 +10,10 @@ public class GestorFicheiros {
     }
 
     //constantes
-    private static final String fClientes = "clientes.txt";
-    private static final String fProdutos = "produtos.txt";
-    private static final String fPromocoes = "promocoes.txt";
-    private static final String fCadSup = "cadSup.obj";
+    private static final String fClientes = "src/projeto/clientes.txt";
+    private static final String fProdutos = "src/projeto/produtos.txt";
+    private static final String fPromocoes = "src/projeto/promocoes.txt";
+    private static final String fCadSup = "src/projeto/cadSup.obj";
 
     /**
      * Ler o ficheiro dos clientes
@@ -44,7 +45,7 @@ public class GestorFicheiros {
             br.close();
             return clientes;
         } catch(IOException ex){
-            System.out.println("Erro ao ler ficheiro" + fClientes);
+            System.out.println("Erro ao ler ficheiro " + fClientes);
         } catch(NumberFormatException ex) {
             //verificar se o erro ocorreu numa linha específica do ficheiro de texto
             if(linha_erro != 0)
@@ -142,6 +143,7 @@ public class GestorFicheiros {
                     System.out.println("Produto não encontrado no ficheiro " + fPromocoes + " na linha " + linha_erro);
                     return null;
                 }
+                return produtos;
             }
 
         } catch(IOException ex){

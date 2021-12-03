@@ -1,0 +1,10 @@
+Gonçalo Almeida;departamento de engenharia informática;uc2020218868@student.uc.pt;910000000;11/09/2002;regular
+Pessoa 1;Polo I;uc2020211111@student.uc.pt;911111111;11/1/11;frequente
+Pessoa 2;Polo II;uc2020212222@student.uc.pt;922222222;22/2/22;regular
+Pessoa 3;Polo III;uc2020213333@student.uc.pt;933333333;3/3/33;regular
+Pessoa 4;Polo IV;uc2020214444@student.uc.pt;944444444;4/4/44;regular
+Pessoa 5;Polo V;uc2020215555@student.uc.pt;955555555;5/5/55;frequente
+Pessoa 6;Polo VI;uc2020216666@student.uc.pt;966666666;6/6/66;regular
+Pessoa 7;Polo VII;uc2020217777@student.uc.pt;977777777;7/7/77;frequente
+Pessoa 8;Polo VIII;uc2020218888@student.uc.pt;988888888;8/8/88;frequente
+João Santos;DEI;uc2020218995@student.uc.pt;920000000;06/11/2002;frequente
