@@ -84,7 +84,7 @@ public abstract class Cliente implements Serializable {
 
     /**
      * Método toString da classe Cliente
-     * @return String com informações acerca do cliente
+     * @return String com informações acerca de um cliente
      */
     @Override
     public String toString() {

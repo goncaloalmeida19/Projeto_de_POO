@@ -1,14 +1,33 @@
 package projeto;
 
+/**
+ * Classe que contém um produto Pague3Leve4.
+ * Carateriza-se com os atributos que uma promoção.
+ */
 public class Pague3Leve4 extends Promocao{
+    /**
+     * Construtor da classe Pague3Leve4
+     * @param inicio Data inicial de uma promoção
+     * @param fim Data final de uma promoção
+     */
     public Pague3Leve4(Data inicio, Data fim) {
         super(inicio, fim);
     }
 
+    /**
+     * Método para obter o desconto que uma promoção aplica a um produto
+     * @param quantidade Quantidade de um produto
+     * @param precoUni Preço unitário de um produto
+     * @return precoUni multiplicado pela divisão inteira da quantidade por 4, devido ao tipo de promoção
+     */
     public double desconto(int quantidade, double precoUni){
         return precoUni * (int)(quantidade / 4);
     }
 
+    /**
+     * Método toString da classe Pague3Leve4
+     * @return Tipo de promoção (Pague3Leve4)
+     */
     @Override
     public String toString() {
         return "Pague3Leve4";
