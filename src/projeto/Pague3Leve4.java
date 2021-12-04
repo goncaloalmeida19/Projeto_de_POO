@@ -18,7 +18,7 @@ public class Pague3Leve4 extends Promocao{
      * Método para obter o desconto que uma promoção aplica a um produto
      * @param quantidade Quantidade de um produto
      * @param precoUni Preço unitário de um produto
-     * @return precoUni multiplicado pela divisão inteira da quantidade por 4, devido ao tipo de promoção
+     * @return  Desconto que a promoção Pague3Leve4 aplica a um produto
      */
     public double desconto(int quantidade, double precoUni){
         return precoUni * (int)(quantidade / 4);

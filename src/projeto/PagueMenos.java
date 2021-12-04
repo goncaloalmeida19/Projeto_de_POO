@@ -18,7 +18,7 @@ public class PagueMenos extends Promocao{
      * Método para obter o desconto que uma promoção aplica a um produto
      * @param quantidade Quantidade de um produto
      * @param precoUni Preço unitário de um produto
-     * @return
+     * @return Desconto que a promoção PagueMenos aplica a um produto
      */
     public double desconto(int quantidade, double precoUni){
         double desc = 0;

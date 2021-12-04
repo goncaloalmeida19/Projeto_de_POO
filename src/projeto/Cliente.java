@@ -76,7 +76,7 @@ public abstract class Cliente implements Serializable {
     }
 
     /**
-     * Método para obter lista de compras realizadas até a uma data
+     * Método para obter lista de compras realiadas até a uma data
      * @param data Data a comparar
      * @return Lista de compras realizadas até a uma data
      */
