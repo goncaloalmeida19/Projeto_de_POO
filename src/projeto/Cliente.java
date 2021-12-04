@@ -1,5 +1,6 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * telefone, data de nascimento e lista de
  * compras realizadas de um cliente.
  */
-public abstract class Cliente {
+public abstract class Cliente implements Serializable {
     private final String nome;
     private final String morada;
     private final String email;

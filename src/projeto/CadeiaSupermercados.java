@@ -1,9 +1,10 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadeiaSupermercados {
+public class CadeiaSupermercados implements Serializable {
     private List<Cliente> clientes;
     private List<Produto> produtos;
 

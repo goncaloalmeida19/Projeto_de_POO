@@ -1,6 +1,8 @@
 package projeto;
 
-public abstract class Promocao {
+import java.io.Serializable;
+
+public abstract class Promocao implements Serializable {
     private final Data inicio;
     private final Data fim;
 

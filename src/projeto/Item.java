@@ -1,10 +1,12 @@
 package projeto;
 
+import java.io.Serializable;
+
 /**
  * Classe que contém um item.
  * Carateriza-se por um produto e quantidade.
  */
-public class Item {
+public class Item implements Serializable {
     private final Produto produto;
     private int quantidade;
 

@@ -1,5 +1,6 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Classe que contém uma compra.
  * Carateriza-se pela data da compra realizada e pelo carrinho da mesma.
  */
-public class Compra {
+public class Compra implements Serializable {
     private final Data data;
     private final List<Item> carrinho;
 

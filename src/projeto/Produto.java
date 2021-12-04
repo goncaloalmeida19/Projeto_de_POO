@@ -1,5 +1,6 @@
 package projeto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * lista de promoções datadas e pelo stock inicial de um
  * produto.
  */
-public abstract class Produto {
+public abstract class Produto implements Serializable {
     protected final String identificador;
     protected final String nome;
     protected final double precoUni;

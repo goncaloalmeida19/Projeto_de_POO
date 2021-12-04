@@ -1,10 +1,12 @@
 package projeto;
 
+import java.io.Serializable;
+
 /**
  * Classe que contém uma data.
  * Carateriza-se pelo dia, mês e ano de uma data.
  */
-public class Data {
+public class Data implements Serializable {
     private int dia;
     private int mes;
     private int ano;
