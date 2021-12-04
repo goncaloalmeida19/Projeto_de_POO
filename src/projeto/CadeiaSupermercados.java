@@ -10,14 +10,6 @@ public class CadeiaSupermercados {
     public CadeiaSupermercados() {
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }

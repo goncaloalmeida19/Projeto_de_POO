@@ -1,26 +1,47 @@
 package projeto;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que contém uma compra.
+ * Carateriza-se pela data da compra realizada e pelo carrinho da mesma.
+ */
 public class Compra {
     private final Data data;
     private final List<Item> carrinho;
 
+    /**
+     * Construtor da classe Compra
+     * @param data Data da compra realizada
+     */
     public Compra(Data data) {
         this.data = data;
         carrinho = new ArrayList<>();
     }
 
+    /**
+     * Método para obter a data de uma compra
+     * @return Data de uma compra
+     */
     public Data getData() {
         return data;
     }
 
+    /**
+     * Método para obter o carrinho de uma compra
+     * @return Carrinho de uma compra
+     */
     public List<Item> getCarrinho() {
         return carrinho;
     }
-    
+
+    /**
+     * Método para verificar se um produto está no carrinho
+     * @param p Produto a verificar
+     * @return item, se houver, no carrinho, um 'item' cujo atributo produto seja o produto a verificar,
+     * ou null, caso contrário
+     */
     private Item contemProduto(Produto p){
         for(Item item: carrinho){
             if(item.getProduto().igual(p)){
@@ -31,10 +52,10 @@ public class Compra {
     }
 
     /**
-     * Verifica se o stock atual é suficiente para a quantidade pedida do produto
-     * @param stockAtual stock atual do produto
-     * @param quantidade quantidade pedida do produto
-     * @return -2 se o stock atual for suficiente, -1 se este for 0, ou retorna o mesmo se for
+     * Método para verificar se o stock atual é suficiente para a quantidade pedida do produto
+     * @param stockAtual Stock atual do produto
+     * @param quantidade Quantidade pedida do produto
+     * @return -2, se o stock atual for suficiente, -1, se este for 0, ou retorna o mesmo se for
      * inferior à quantidade pedida
      */
     private int stockAtualSuficiente(int stockAtual, int quantidade){
@@ -44,11 +65,11 @@ public class Compra {
     }
 
     /**
-     * Adicionar um ‘item’ ao carrinho
-     * @param produto produto a adicionar
-     * @param quantidade quantidade do produto a adicionar
-     * @param compras lista de compras
-     * @return -2 se correr tudo bem, -1 se não houver stock, ou retorna o stock atual se este for inferior
+     * Método para adicionar um ‘item’ ao carrinho
+     * @param produto Produto a adicionar
+     * @param quantidade Quantidade do produto a adicionar
+     * @param compras Lista de compras realizadas
+     * @return -2, se correr tudo bem, -1, se não houver stock suficiente, ou stock atual, se este for inferior
      * à quantidade pedida
      */
     public int addCarrinho(Produto produto, int quantidade, List<Compra> compras) {
@@ -68,6 +89,13 @@ public class Compra {
         return -2;
     }
 
+    /**
+     * Método para remover um ‘item’ ao carrinho
+     * @param produto Produto cuja quantidade associada irá ser removida
+     * @param quantidade Quantidade do produto a remover
+     * @return 1, se correr tudo bem, -1, se a quantidade do produto no carrinho for inferior ou igual
+     * à quantidade pedida, ou 0, se o produto não estiver no carrinho
+     */
     public int removerCarrinho(Produto produto, int quantidade) {
         Item i = contemProduto(produto);
         if(i != null){
@@ -81,6 +109,11 @@ public class Compra {
         }else return 0;
     }
 
+    /**
+     * Método para obter a quantidade de um produto no carrinho
+     * @param p Produto de que se quer a quantidade presente no carrinho
+     * @return Quantidade de um produto no carrinho
+     */
     public int obterQuantidade(Produto p){
         for(Item i: carrinho){
             if(i.getProduto().igual(p)){
@@ -90,6 +123,12 @@ public class Compra {
         return 0;
     }
 
+    /**
+     * Método para obter o preço de envio, tendo em conta o tipo de produtos no carrinho e o cliente a realizar a compra
+     * @param cliente Cliente a realizar a compra
+     * @param preco Preço da compra (s/ portes)
+     * @return Preço de envio da compra
+     */
     public double precoDeEnvioTotal(Cliente cliente, double preco) {
         double envio = cliente.precoDeEnvio(preco);
 
@@ -101,6 +140,10 @@ public class Compra {
         return envio;
     }
 
+    /**
+     * Método para obter o preço de uma compra (s/ portes)
+     * @return Preço de uma compra (s/ portes)
+     */
     public double precoSemEnvio(){
         double preco = 0.0;
         for(Item i: carrinho){
@@ -109,10 +152,17 @@ public class Compra {
         return preco;
     }
 
+    /**
+     * Método para remover todos os 'itens' do carrinho
+     */
     public void clear(){
         carrinho.clear();
     }
 
+    /**
+     * Método toString da classe Compra
+     * @return String com informações acerca do carrinho e dos produtos presentes no mesmo
+     */
     @Override
     public String toString() {
         if(carrinho.size() == 0)  return  "Carrinho vazio.";

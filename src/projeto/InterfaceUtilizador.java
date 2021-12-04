@@ -67,8 +67,8 @@ public class InterfaceUtilizador {
         if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + data);
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
-            for(Compra v: cliente.getCompras()){
-                System.out.println("Compra do dia " + v.getData() + ":" + v);
+            for(Compra c: cliente.getCompras()){
+                if(c.getData().compareTo(data) <= 0) System.out.println("Compra do dia " + c.getData() + ":" + c);
             }
         }
     }

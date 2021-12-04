@@ -1,10 +1,20 @@
 package projeto;
 
+/**
+ * Classe que contém uma data.
+ * Carateriza-se pelo dia, mês e ano de uma data.
+ */
 public class Data {
     private int dia;
     private int mes;
     private int ano;
 
+    /**
+     * Construtor da classe Data
+     * @param dia Dia de uma data
+     * @param mes Mês de uma data
+     * @param ano Ano de uma data
+     */
     public Data(int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
@@ -12,10 +22,10 @@ public class Data {
     }
 
     /**
-     * Alterar os valores de uma data
-     * @param dia dia de uma data
-     * @param mes mês de uma data
-     * @param ano ano de uma data
+     * Método para alterar os valores de uma data
+     * @param dia Dia de uma data
+     * @param mes Mês de uma data
+     * @param ano Ano de uma data
      */
     public void setData(int dia, int mes, int ano){
         this.dia = dia;
@@ -24,8 +34,8 @@ public class Data {
     }
 
     /**
-     * Verificar se um ano é bissexto ou não
-     * @param ano ano de uma data
+     * Método para verificar se um ano é bissexto ou não
+     * @param ano Ano de uma data
      * @return true, se o ano for bissexto, e false, se não for bissexto
      */
     private boolean eBissexto(int ano){
@@ -34,8 +44,8 @@ public class Data {
 
 
     /**
-     * Verificar se a data que chama o método é válida ou não
-     * @return true, se a data que chama o método for válida, e false, se for inválida
+     * Método para verificar se uma data é válida ou não
+     * @return true, se a data que chama o método for válida, e false, caso contrário
      */
     public boolean eValida(){
         // Verificação dos limites habituais do ano, mês e dia
@@ -51,8 +61,8 @@ public class Data {
     }
 
     /**
-     * Comparar duas datas
-     * @param d data a comparar
+     * Método para comparar duas datas
+     * @param d Data a comparar
      * @return -1, 0 ou 1, respetivamente, se a data for antes, igual ou depois da data a comparar
      */
     public int compareTo(Data d){
@@ -63,6 +73,10 @@ public class Data {
         return Integer.compare(dia, d.dia);
     }
 
+    /**
+     * Método toString da classe Data
+     * @return String da data com o formato Dia/Mês/Ano
+     */
     @Override
     public String toString() {
         return  dia + "/" + mes + "/" + ano ;

@@ -10,7 +10,7 @@ public class Mobiliario extends Produto{
     private final Dimensao dim;
 
     /**
-     *
+     * Construtor da classe Mobiliario
      * @param identificador Identificador de um produto
      * @param nome Nome de um produto
      * @param precoUni Preço unitário de um produto
@@ -34,7 +34,7 @@ public class Mobiliario extends Produto{
     }
 
     /**
-     * Método toString da classe Mobiliário
+     * Método toString da classe Mobiliario
      * @return Nome e identificador de um produto acompanhado pela sua descrição definida pela categoria de produto (Mobiliário)
      */
     @Override
