@@ -63,18 +63,16 @@ public class InterfaceUtilizador {
     }
 
     private void imprimirComprasRealizadas(Cliente cliente, Data data){
-        List<Compra> compras = cliente.getCompras();
+        List<Compra> compras = cliente.obterComprasAteData(data);
         if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + data);
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
             for(Compra c: compras){
-                if(c.getData().compareTo(data) <= 0){
-                    System.out.println("Compra do dia " + c.getData() + ":" + c);
-                    double preco = c.getPrecoSemEnvioFinal();
-                    System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
-                    double precoFinal = c.getPrecoComEnvioFinal();
-                    System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
-                }
+                System.out.println("Compra do dia " + c.getData() + ":" + c);
+                double preco = c.getPrecoSemEnvioFinal();
+                System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+                double precoFinal = c.getPrecoComEnvioFinal();
+                System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
             }
         }
     }

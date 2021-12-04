@@ -76,6 +76,21 @@ public abstract class Cliente implements Serializable {
     }
 
     /**
+     * Método para obter lista de compras realizadas até a uma data
+     * @param data Data a comparar
+     * @return Lista de compras realizadas até a uma data
+     */
+    public List<Compra> obterComprasAteData(Data data){
+        List<Compra> comprasAteData = new ArrayList<>();
+        for(Compra c: compras){
+            if(c.getData().compareTo(data) <= 0){
+                comprasAteData.add(c);
+            }
+        }
+        return comprasAteData;
+    }
+
+    /**
      * Método para obter o preço de envio da compra de um cliente
      * @param preco Preço da compra (s/ portes)
      * @return Preço de envio da compra de um cliente
