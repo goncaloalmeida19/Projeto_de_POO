@@ -1,5 +1,5 @@
 Gonçalo Almeida;departamento de engenharia informática;uc2020218868@student.uc.pt;910000000;11/09/2002;regular
-Pessoa 1;Polo I;uc2020211111@student.uc.pt;911111111;11/1/11;frequente
+Pessoa 1;Polo I;1111@pt;911111111;11/1/11;frequente
 Pessoa 2;Polo II;uc2020212222@student.uc.pt;922222222;22/2/22;regular
 Pessoa 3;Polo III;uc2020213333@student.uc.pt;933333333;3/3/33;regular
 Pessoa 4;Polo IV;uc2020214444@student.uc.pt;944444444;4/4/44;regular

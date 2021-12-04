@@ -2,7 +2,6 @@ package projeto;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GestorFicheiros {
@@ -10,10 +9,11 @@ public class GestorFicheiros {
     }
 
     //constantes
-    private static final String fClientes = "src/projeto/clientes.txt";
-    private static final String fProdutos = "src/projeto/produtos.txt";
-    private static final String fPromocoes = "src/projeto/promocoes.txt";
-    private static final String fCadSup = "src/projeto/cadSup.obj";
+    private static final String fpath = "src/projeto/";
+    private static final String fClientes = "clientes.txt";
+    private static final String fProdutos = "produtos.txt";
+    private static final String fPromocoes = "promocoes.txt";
+    private static final String fCadSup = "cadSup.obj";
 
     /**
      * Ler o ficheiro dos clientes
@@ -21,7 +21,7 @@ public class GestorFicheiros {
      */
     public List<Cliente> obterClientes(){
         int linha_erro = 0;
-        File f = new File(fClientes);
+        File f = new File(fpath + fClientes);
         try{
             List<Cliente> clientes = new ArrayList<>();
             FileReader fr = new FileReader(f);
@@ -62,7 +62,7 @@ public class GestorFicheiros {
      */
     public List<Produto> obterProdutos(){
         int linha_erro = 0;
-        File f = new File(fProdutos);
+        File f = new File(fpath + fProdutos);
         try{
             List<Produto> produtos = new ArrayList<>();
             FileReader fr = new FileReader(f);
@@ -110,7 +110,7 @@ public class GestorFicheiros {
      */
     public List<Produto> obterPromocoes(List<Produto> produtos){
         int linha_erro = 0;
-        File f = new File(fPromocoes);
+        File f = new File(fpath + fPromocoes);
         try{
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
@@ -164,13 +164,13 @@ public class GestorFicheiros {
      */
     public void escreverCadSup(CadeiaSupermercados cad){
         try {
-            File f = new File(fCadSup);
+            File f = new File(fpath + fCadSup);
             FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(cad);
             oos.close();
         } catch(IOException ex) {
-            System.out.println("Erro ao ler ficheiro " + fCadSup);
+            System.out.println("Erro ao escrever no ficheiro " + fCadSup);
         } catch(NumberFormatException ex) {
             System.out.println("Erro no formato do ficheiro" + fCadSup);
         }
