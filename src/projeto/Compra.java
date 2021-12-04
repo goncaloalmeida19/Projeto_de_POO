@@ -11,6 +11,8 @@ import java.util.List;
 public class Compra implements Serializable {
     private final Data data;
     private final List<Item> carrinho;
+    private double precoSemEnvioFinal;
+    private double precoComEnvioFinal;
 
     /**
      * Construtor da classe Compra
@@ -35,6 +37,39 @@ public class Compra implements Serializable {
      */
     public List<Item> getCarrinho() {
         return carrinho;
+    }
+
+    /**
+     * Método para obter o preco sem envio final da compra
+     * @return preco sem envio final da compra
+     */
+    public double getPrecoSemEnvioFinal() {
+        return precoSemEnvioFinal;
+    }
+
+    /**
+     * Método para obter o preco com envio final da compra
+     * @return preco com envio final da compra
+     */
+    public double getPrecoComEnvioFinal() {
+        return precoComEnvioFinal;
+    }
+
+
+    /**
+     * Método para definir o preco sem envio final da compra
+     * @param precoSemEnvioFinal preço a definir
+     */
+    public void setPrecoSemEnvioFinal(double precoSemEnvioFinal) {
+        this.precoSemEnvioFinal = precoSemEnvioFinal;
+    }
+
+    /**
+     * Método para definir o preco com envio final da compra
+     * @param precoComEnvioFinal preço a definir
+     */
+    public void setPrecoComEnvioFinal(double precoComEnvioFinal) {
+        this.precoComEnvioFinal = precoComEnvioFinal;
     }
 
     /**
@@ -171,8 +206,8 @@ public class Compra implements Serializable {
             String produtos = "";
             for(Item item: carrinho){
                 Produto p = item.getProduto();
-                produtos = produtos.concat("\n\tProduto: " + p.getNome() + " Quantidade: " + item.getQuantidade()
-                        + " Valor (s/ Promoção): " + String.format("%.2f",p.getPrecoUni() * item.getQuantidade())+ "€");
+                produtos = produtos.concat("\n\tProduto: " + p.getNome() + ", Quantidade: " + item.getQuantidade()
+                        + ", Valor (s/ Promoção): " + String.format("%.2f",p.getPrecoUni() * item.getQuantidade())+ "€");
             }
             return produtos;
         }

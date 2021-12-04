@@ -7,9 +7,20 @@ public class Main {
         GestorFicheiros gf = new GestorFicheiros();
 
         CadeiaSupermercados cad = new CadeiaSupermercados();
-        cad.setClientes(gf.obterClientes());
-        List<Produto> produtos = gf.obterPromocoes(gf.obterProdutos());
-        cad.setProdutos(produtos);
+        if(gf.lerFichObj()){ //verificar se o ficheiro de objetos existe
+            cad = gf.lerCadSup();
+            if(cad == null) return;
+        } else{
+            List<Cliente> clientes = gf.obterClientes();
+            if(clientes == null) return;
+            cad.setClientes(clientes);
+
+            List<Produto> produtos = gf.obterProdutos();
+            if(produtos == null) return;
+            produtos = gf.obterPromocoes(produtos);
+            if(produtos == null) return;
+            cad.setProdutos(produtos);
+        }
 
         InterfaceUtilizador i = new InterfaceUtilizador(cad, gf);
         i.menu();

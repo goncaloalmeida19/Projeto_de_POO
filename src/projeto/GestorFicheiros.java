@@ -46,7 +46,7 @@ public class GestorFicheiros {
             return clientes;
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fClientes);
-        } catch(NumberFormatException ex) {
+        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             //verificar se o erro ocorreu numa linha específica do ficheiro de texto
             if(linha_erro != 0)
                 System.out.println("Erro no formato do ficheiro " + fClientes + " na linha " + linha_erro);
@@ -91,7 +91,7 @@ public class GestorFicheiros {
             return produtos;
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fProdutos);
-        } catch(NumberFormatException ex) {
+        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             //verificar se o erro ocorreu numa linha específica do ficheiro de texto
             if(linha_erro != 0)
                 System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
@@ -148,7 +148,7 @@ public class GestorFicheiros {
 
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fPromocoes);
-        } catch(NumberFormatException ex) {
+        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             //verificar se o erro ocorreu numa linha específica do ficheiro de texto
             if(linha_erro != 0)
                 System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
@@ -159,7 +159,7 @@ public class GestorFicheiros {
     }
 
     /**
-     * Escreve os dados da cadeia de supermercados num ficheiro de objetos
+     * Escreve os dados da cadeia de supermercados no ficheiro de objetos
      * @param cad cadeia de supermercados cujos dados irão ser registados
      */
     public void escreverCadSup(CadeiaSupermercados cad){
@@ -172,7 +172,38 @@ public class GestorFicheiros {
         } catch(IOException ex) {
             System.out.println("Erro ao escrever no ficheiro " + fCadSup);
         } catch(NumberFormatException ex) {
-            System.out.println("Erro no formato do ficheiro" + fCadSup);
+            System.out.println("Erro no formato do ficheiro " + fCadSup);
         }
+    }
+
+    /**
+     * Lê os dados da cadeia de supermercados do ficheiro de objetos
+     * @return cadeia de supermercados lida
+     */
+    public CadeiaSupermercados lerCadSup(){
+        try {
+            File f = new File(fpath + fCadSup);
+            FileInputStream fis = new FileInputStream(f);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            CadeiaSupermercados cad = (CadeiaSupermercados) ois.readObject();
+            ois.close();
+            return cad;
+        } catch(IOException ex) {
+            System.out.println("Erro ao ler o ficheiro " + fCadSup);
+        } catch(NumberFormatException ex) {
+            System.out.println("Erro no formato do ficheiro "  + fCadSup);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Classe não encontrada no ficheiro " + fCadSup);
+        }
+        return null;
+    }
+
+    /**
+     * Função que verifica se o ficheiro de objetos já foi criado
+     * @return true se o ficheiro de objetos já foi criado, false em caso contrário
+     */
+    public boolean lerFichObj(){
+        File f = new File(fpath + fCadSup);
+        return f.exists();
     }
 }

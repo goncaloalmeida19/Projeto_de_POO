@@ -67,8 +67,14 @@ public class InterfaceUtilizador {
         if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + data);
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
-            for(Compra c: cliente.getCompras()){
-                if(c.getData().compareTo(data) <= 0) System.out.println("Compra do dia " + c.getData() + ":" + c);
+            for(Compra c: compras){
+                if(c.getData().compareTo(data) <= 0){
+                    System.out.println("Compra do dia " + c.getData() + ":" + c);
+                    double preco = c.getPrecoSemEnvioFinal();
+                    System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+                    double precoFinal = c.getPrecoComEnvioFinal();
+                    System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+                }
             }
         }
     }
@@ -148,9 +154,9 @@ public class InterfaceUtilizador {
             List<Item> carrinho = compra.getCarrinho();
             System.out.println("\nCarrinho: " + compra);
                 double preco = compra.precoSemEnvio();
-                System.out.println("\nPreço (s/ portes): " + String.format("%.2f",preco) + "€");
+                System.out.println("\nPreço sem promoção (s/ portes): " + String.format("%.2f",preco) + "€");
                 double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-                System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€");
+                System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€");
 
                 System.out.println("""
     
@@ -180,9 +186,7 @@ public class InterfaceUtilizador {
     private boolean printFinal(Compra compra, Cliente cliente){
         cad.confirmaCompra(compra, cliente);
         System.out.println("\nEncomenda enviada para " + cliente.getMorada() +
-                           " em nome de " + cliente.getNome() +
-                           "\nObrigado por fazer compras com a SONAI, " +
-                           "a melhor cadeia de supermercados da Península Ibérica");
+                           " em nome de " + cliente.getNome());
         return true;
     }
 
@@ -191,22 +195,22 @@ public class InterfaceUtilizador {
         else{
             System.out.println("\nCarrinho final:" + compra);
             double preco = compra.precoSemEnvio();
-            System.out.println("\nPreço com desconto (s/ portes): " + String.format("%.2f",preco) + "€");
+            compra.setPrecoSemEnvioFinal(preco);
+            System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
             double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-            System.out.println("Preço com desconto (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+            compra.setPrecoComEnvioFinal(precoFinal);
+            System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
             int op = 1;
-            boolean comp = false;
             while(op != 2){
                 System.out.println("1. Confirmar a compra.\n2. Voltar para o menu de compra.");
                 System.out.print("Opção: ");
                 op = readIntProtection();
                 switch(op){
-                    case 1 -> comp = printFinal(compra, cliente);
+                    case 1 -> { if(printFinal(compra, cliente)) return true; }
                     case 2 -> {}
                     default -> System.out.println("Opção inválida.");
                 }
                 System.out.println();
-                if(comp) return true;
             }
         }
         return false;
@@ -214,7 +218,6 @@ public class InterfaceUtilizador {
 
     private void menuCompra(Data data, Cliente cliente) {
         int op = -1;
-        boolean comp;
         Compra compra = new Compra(data);
         while(op != 4) {
             System.out.println("""
@@ -229,8 +232,7 @@ public class InterfaceUtilizador {
                 case 1 -> realizarCompra(compra);
                 case 2 -> verCarrinho(compra, cliente);
                 case 3 -> {
-                    comp = confirmarCompra(compra, cliente);
-                    if(comp) {
+                    if(confirmarCompra(compra, cliente)) {
                         gf.escreverCadSup(cad);
                         return;
                     }
