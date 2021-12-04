@@ -70,9 +70,9 @@ public class InterfaceUtilizador {
             for(Compra c: compras){
                 System.out.println("Compra do dia " + c.getData() + ":" + c);
                 double preco = c.getPrecoSemEnvioFinal();
-                System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+                System.out.println("\n\tPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
                 double precoFinal = c.getPrecoComEnvioFinal();
-                System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+                System.out.println("\tPreço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
             }
         }
     }
