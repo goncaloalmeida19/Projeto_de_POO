@@ -1,8 +1,8 @@
 package projeto;
 
 /**
- * Classe que contém um cliente frequente.
- * Carateriza-se pelos atributos que um cliente já possui,
+ * Classe que representa um cliente frequente.
+ * Contém os atributos que um cliente já possui,
  * sendo que a função precoDeEnvio devolve um preço específico
  * para este tipo de cliente.
  */

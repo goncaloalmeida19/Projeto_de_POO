@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que contém uma compra.
- * Carateriza-se pela data da compra realizada e pelo carrinho da mesma.
+ * Classe que representa uma compra.
+ * Contém a data da compra realizada, o carrinho da mesma,
+ * e ainda os preços finais com e sem portes.
  */
 public class Compra implements Serializable {
     private final Data data;

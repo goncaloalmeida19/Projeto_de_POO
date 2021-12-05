@@ -94,9 +94,10 @@ public class InterfaceUtilizador {
             for(Compra c: compras){
                 System.out.println("Compra do dia " + c.getData() + ":" + c);
                 double preco = c.getPrecoSemEnvioFinal();
-                System.out.println("\n\tPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+                System.out.println("\n\tPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
                 double precoFinal = c.getPrecoComEnvioFinal();
-                System.out.println("\tPreço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+                System.out.println("\tPreço com portes (c/ promoção): "
+                        + String.format("%.2f",precoFinal) + "€\n");
             }
         }
     }
@@ -194,9 +195,9 @@ public class InterfaceUtilizador {
             List<Item> carrinho = compra.getCarrinho();
             System.out.println("\nCarrinho: " + compra);
                 double preco = compra.precoSemEnvio();
-                System.out.println("\nPreço sem promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+                System.out.println("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
                 double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-                System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€");
+                System.out.println("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€");
 
                 System.out.println("""
     
@@ -246,10 +247,10 @@ public class InterfaceUtilizador {
             System.out.println("\nCarrinho final:" + compra);
             double preco = compra.precoSemEnvio();
             compra.setPrecoSemEnvioFinal(preco);
-            System.out.println("\nPreço com promoção (s/ portes): " + String.format("%.2f",preco) + "€");
+            System.out.println("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
             double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
             compra.setPrecoComEnvioFinal(precoFinal);
-            System.out.println("Preço com promoção (c/ portes): " + String.format("%.2f",precoFinal) + "€\n");
+            System.out.println("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€\n");
             int op = 1;
             while(op != 2){
                 System.out.println("1. Confirmar a compra.\n2. Voltar para o menu de compra.");

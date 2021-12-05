@@ -3,8 +3,8 @@ package projeto;
 import java.io.Serializable;
 
 /**
- * Classe que contém uma data.
- * Carateriza-se pelo dia, mês e ano de uma data.
+ * Classe que representa uma data.
+ * Contém o dia, mês e ano de uma data.
  */
 public class Data implements Serializable {
     private int dia;

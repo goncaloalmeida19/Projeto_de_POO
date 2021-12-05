@@ -1,9 +1,9 @@
 package projeto;
 
 /**
- * Classe que contém um produto alimentar.
- * Carateriza-se com o número calorias e gordura do produto
- * além dos atributos que um produto já possui.
+ * Classe que representa um produto alimentar.
+ * Contém o nºcalorias/100g e a percentagem de gordura,
+ * além dos atributos que um produto já contém.
  */
 public class Alimentar extends Produto{
     private final int calorias;
@@ -39,6 +39,6 @@ public class Alimentar extends Produto{
     @Override
     public String toString() {
         return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n\t\tCalorias: "
-                + calorias + "kcal\n" + "\t\tGordura: " + gordura + "kg\n\t\tPreço Unitário: " + precoUni;
+                + calorias + "/100g\n" + "\t\tGordura: " + gordura + "%\n\t\tPreço Unitário: " + precoUni;
     }
 }

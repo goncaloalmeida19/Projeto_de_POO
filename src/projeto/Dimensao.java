@@ -4,10 +4,8 @@ package projeto;
 import java.io.Serializable;
 
 /**
- * Classe que contém a dimensão de um produto de mobiliário.
- * Carateriza-se com a altura, largura e profundidade do
- * produto de mobiliário, visto que só é usada como atributo
- * na classe correspondente a um produto de mobiliário.
+ * Classe que representa a dimensão de um produto de mobiliário.
+ * Contém a sua altura, largura e profundidade.
  */
 public class Dimensao implements Serializable {
     private final double altura;
