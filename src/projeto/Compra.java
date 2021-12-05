@@ -126,7 +126,7 @@ public class Compra implements Serializable {
     }
 
     /**
-     * Método para remover um item ao carrinho
+     * Método para remover uma quantidade de um produto no carrinho
      * @param produto Produto cuja quantidade associada irá ser removida
      * @param quantidade Quantidade do produto a remover
      * @return -2, se correr tudo bem e o produto continuar no carrinho;
