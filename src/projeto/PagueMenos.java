@@ -2,7 +2,8 @@ package projeto;
 
 /**
  * Classe que representa uma promoção do tipo PagueMenos.
- * Contém os atributos de uma promoção.
+ * Contém os atributos de uma promoção, e um método que calcula o desconto
+ * tendo em conta o tipo de promoção (pague menos).
  */
 public class PagueMenos extends Promocao{
     /**

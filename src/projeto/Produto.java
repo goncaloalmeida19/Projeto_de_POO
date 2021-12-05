@@ -106,7 +106,7 @@ public abstract class Produto implements Serializable {
      * @param c Compra
      * @return Quantidade de um produto na compra
      */
-    private int encontraNaCompra(Compra c){
+    private int encontrarNaCompra(Compra c){
         for(Item i: c.getCarrinho())
             if(i.getProduto().igual(this))
                 return i.getQuantidade();
@@ -123,7 +123,7 @@ public abstract class Produto implements Serializable {
         int stockAtual = stockInicial;
         for(Compra v: compras)
             if(d.compareTo(v.getData()) >= 0)
-                stockAtual -= encontraNaCompra(v);
+                stockAtual -= encontrarNaCompra(v);
         return stockAtual;
     }
 
