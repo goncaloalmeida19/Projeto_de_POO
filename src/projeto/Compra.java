@@ -192,7 +192,7 @@ public class Compra implements Serializable {
     }
 
     /**
-     * Método para remover todos os 'itens' do carrinho
+     * Método para remover todos os itens do carrinho
      */
     public void clear(){
         carrinho.clear();

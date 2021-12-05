@@ -1,4 +1,4 @@
-alimentar;1;laranja;1.0;100;0.2;7
+alimentar;1;laranja;10.0;100;0.2;15
 limpeza;2;cif;2.2;5;7
 mobiliario;5;sofa;1000;120;1;1;1;5
 alimentar;4;gomas;0.59;0;0.0;420
