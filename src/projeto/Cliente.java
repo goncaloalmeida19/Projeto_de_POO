@@ -32,6 +32,11 @@ public abstract class Cliente implements Serializable {
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
         this.compras = new ArrayList<>();
+
+        if(telefone < 0){
+            System.out.println("Número de telefone inválido.");
+            throw new NumberFormatException();
+        }
     }
 
     /**
