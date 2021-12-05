@@ -87,7 +87,7 @@ public class CadeiaSupermercados implements Serializable {
 
             Promocao promo = p.obterPromocao(data);
             catalogo = catalogo.concat(p + "€ (Stock: " + stock);
-            if(promo != null) catalogo = catalogo.concat(" Promoção: " + promo);
+            if(promo != null) catalogo = catalogo.concat(", Promoção: " + promo);
             catalogo = catalogo.concat(")\n\n");
         }
         return catalogo;

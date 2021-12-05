@@ -16,6 +16,10 @@ public abstract class Promocao implements Serializable {
      * @param fim Data final de uma promoção
      */
     public Promocao(Data inicio, Data fim) {
+        if(fim.compareTo(inicio) < 0){
+            System.out.println("Data final da promoção anterior à inicial.");
+            throw new NumberFormatException();
+        }
         this.inicio = inicio;
         this.fim = fim;
     }

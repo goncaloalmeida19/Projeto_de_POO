@@ -92,13 +92,12 @@ public class Compra implements Serializable {
      * Método para verificar se o stock atual é suficiente para a quantidade pedida do produto
      * @param stockAtual Stock atual do produto
      * @param quantidade Quantidade pedida do produto
-     * @return -2, se o stock atual for suficiente, -1, se este for 0, ou retorna o mesmo se for
+     * @return -1, se o stock atual for suficiente, ou retorna-o se for
      * inferior à quantidade pedida
      */
     private int stockAtualSuficiente(int stockAtual, int quantidade){
-        if(stockAtual == 0) return -1;
         if(stockAtual < quantidade) return stockAtual;
-        return -2;
+        return -1;
     }
 
     /**
@@ -106,7 +105,7 @@ public class Compra implements Serializable {
      * @param produto Produto a adicionar
      * @param quantidade Quantidade do produto a adicionar
      * @param compras Lista de compras realizadas por todos os clientes
-     * @return -2, se correr tudo bem, -1, se não houver stock suficiente, ou stock atual, se este for inferior
+     * @return -1, se correr tudo bem ou stock atual, se este for inferior
      * à quantidade pedida
      */
     public int adicionarCarrinho(Produto produto, int quantidade, List<Compra> compras) {
@@ -115,35 +114,38 @@ public class Compra implements Serializable {
         if(i == null){
             //item ainda não existe no carrinho
             stockAtual = stockAtualSuficiente(stockAtual, quantidade);
-            if(stockAtual > -2) return stockAtual;
+            if(stockAtual > -1) return stockAtual;
             carrinho.add(new Item(produto, quantidade));
         } else{
             //item já existe no carrinho
             stockAtual = stockAtualSuficiente(stockAtual - i.getQuantidade(), quantidade);
-            if(stockAtual > -2) return stockAtual;
+            if(stockAtual > -1) return stockAtual;
             i.incrementarQuantidade(quantidade);
         }
-        return -2;
+        return -1;
     }
 
     /**
      * Método para remover um ‘item’ ao carrinho
      * @param produto Produto cuja quantidade associada irá ser removida
      * @param quantidade Quantidade do produto a remover
-     * @return 1, se correr tudo bem, -1, se a quantidade do produto no carrinho for inferior ou igual
-     * à quantidade pedida, ou 0, se o produto não estiver no carrinho
+     * @return -2, se correr tudo bem e o produto continuar no carrinho;
+     * -1, se tudo correr bem e o produto for removido do carrinho;
+     * 0, se o produto não estiver no carrinho;
+     * ou a quantidade do produto no carrinho, se esta for inferior à quantidade pedida
      */
     public int removerCarrinho(Produto produto, int quantidade) {
         Item i = contemProduto(produto);
-        if(i != null){
-            int itemQuantidade = i.getQuantidade();
-            if(itemQuantidade - quantidade > 0) i.decrementarQuantidade(quantidade);
-            else if(itemQuantidade - quantidade <= 0) {
-                carrinho.remove(i);
-                return -1;
-            }
-            return 1;
-        }else return 0;
+        if(i == null) return 0;
+
+        int itemQuantidade = i.getQuantidade();
+        if(quantidade > itemQuantidade) return itemQuantidade;
+        if(quantidade == itemQuantidade){
+            carrinho.remove(i);
+            return -1;
+        }
+        i.decrementarQuantidade(quantidade);
+        return -2;
     }
 
     /**

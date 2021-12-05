@@ -37,7 +37,13 @@ public class GestorFicheiros {
                 linha_erro++;
                 String[] sp = l.split(";");
                 String[] data = sp[4].split("/");
+
                 Data nasc = new Data(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
+                if(!nasc.eValida()) {
+                    System.out.println("Data inválida no ficheiro " +  fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
+
                 if(sp[5].equals("regular"))
                     clientes.add(new Regular(sp[0],sp[1],sp[2],Integer.parseInt(sp[3]), nasc));
                 else if(sp[5].equals("frequente"))
@@ -125,9 +131,20 @@ public class GestorFicheiros {
                 linha_erro++;
                 String[] sp = l.split(";");
                 String[] dataIni = sp[2].split("/");
+
                 Data dIni = new Data(Integer.parseInt(dataIni[0]),Integer.parseInt(dataIni[1]),Integer.parseInt(dataIni[2]));
+                if(!dIni.eValida()) {
+                    System.out.println("Data inválida no ficheiro " +  fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
+
                 String[] dataFim = sp[3].split("/");
                 Data dFim = new Data(Integer.parseInt(dataFim[0]),Integer.parseInt(dataFim[1]),Integer.parseInt(dataFim[2]));
+                if(!dFim.eValida()) {
+                    System.out.println("Data inválida no ficheiro " +  fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
+
                 Promocao prom;
                 if(sp[0].equals("paguemenos"))
                     prom = new PagueMenos(dIni, dFim);

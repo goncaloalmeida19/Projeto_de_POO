@@ -18,6 +18,10 @@ public class Limpeza extends Produto{
      */
     public Limpeza(String identificador, String nome, double precoUni, int toxicidade, int stockInicial) {
         super(identificador, nome, precoUni, stockInicial);
+        if(toxicidade < 0 || toxicidade > 10){
+            System.out.println("Grau de toxicidade inválida.");
+            throw new NumberFormatException();
+        }
         this.toxicidade = toxicidade;
     }
 

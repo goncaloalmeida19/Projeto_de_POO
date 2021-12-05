@@ -20,6 +20,10 @@ public class Mobiliario extends Produto{
      */
     public Mobiliario(String identificador, String nome, double precoUni, int peso, Dimensao dim, int stockInicial) {
         super(identificador, nome, precoUni, stockInicial);
+        if(peso < 0){
+            System.out.println("Peso inválido.");
+            throw new NumberFormatException();
+        }
         this.peso = peso;
         this.dim = dim;
     }

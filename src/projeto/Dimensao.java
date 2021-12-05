@@ -18,7 +18,19 @@ public class Dimensao implements Serializable {
      * @param largura Largura do produto de mobiliário
      * @param profundidade Profundidade do produto de mobiliário
      */
-    public Dimensao(double altura, double largura, double profundidade) {
+    public Dimensao(double altura, double largura, double profundidade){
+        if(altura < 0){
+            System.out.println("Altura inválida.");
+            throw new NumberFormatException();
+        }
+        if(largura < 0){
+            System.out.println("Largura inválida.");
+            throw new NumberFormatException();
+        }
+        if(profundidade < 0){
+            System.out.println("Profundidade inválida.");
+            throw new NumberFormatException();
+        }
         this.altura = altura;
         this.largura = largura;
         this.profundidade = profundidade;

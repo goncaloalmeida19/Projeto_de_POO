@@ -59,6 +59,14 @@ public abstract class Cliente implements Serializable {
     }
 
     /**
+     * Método para obter a data de nascimento de um cliente
+     * @return Data de nascimento de um cliente
+     */
+    public Data getDataNascimento() {
+        return dataNascimento;
+    }
+
+    /**
      * Método para obter a lista de compras realizadas de um cliente
      * @return Lista de compras realizadas de um cliente
      */

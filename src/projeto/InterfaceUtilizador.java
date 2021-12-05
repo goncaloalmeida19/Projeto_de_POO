@@ -54,7 +54,7 @@ public class InterfaceUtilizador {
      * Método para ler uma data
      * @return Data lida da consola ou null, em caso de erro
      */
-    private Data readData(){
+    private Data readData(Cliente c){
         Data d = new Data(0, 0 ,0);
         boolean valido = true;
         while(valido){
@@ -76,6 +76,7 @@ public class InterfaceUtilizador {
             }
             d.setData(dat[0], dat[1], dat[2]);
             if(!d.eValida()) System.out.println("Data inválida");
+            else if(d.compareTo(c.getDataNascimento()) < 0) System.out.println("Data anterior à do nascimento do cliente");
             else valido = false;
         }
         return d;
@@ -122,16 +123,16 @@ public class InterfaceUtilizador {
                 if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
             }while(quantidade <= 0);
 
-            int adiciona = compra.adicionarCarrinho(produto, quantidade, compras);
+            int stock = compra.adicionarCarrinho(produto, quantidade, compras);
 
-            switch (adiciona) {
-                case -1 -> System.out.println("Não existe stock para o produto requerido.");
-                case -2 -> {
+            switch (stock) {
+                case 0 -> System.out.println("Não existe stock para o produto requerido.");
+                case -1 -> {
                     if (quantidade == 1) System.out.println(produto.getNome() + " adicionado ao carrinho.");
                     else System.out.println(quantidade + " " + produto.getNome() + " adicionados ao carrinho.");
                 }
                 default -> System.out.printf("A quantidade requerida é inferior à disponível. " +
-                        "(Quantidade disponível: %d)\n", adiciona);
+                        "(Quantidade do produto disponível: %d)\n", stock);
             }
         }
     }
@@ -175,10 +176,14 @@ public class InterfaceUtilizador {
                 if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
             }while(quantidade <= 0);
 
-            int remove = compra.removerCarrinho(produto, quantidade);
-            if(remove == 0) System.out.println("Produto inserido não está no carrinho.");
-            // Se remover com sucesso ou o stock total, apresentar esta mensagem
-            else System.out.println("Produto removido do carrinho.");
+            int stock = compra.removerCarrinho(produto, quantidade);
+            switch(stock) {
+                case 0 -> System.out.println("Produto inserido não está no carrinho.");
+                case -1 -> System.out.println("Produto removido do carrinho.");
+                case -2 -> System.out.println(quantidade + " " + produto.getNome() + " removido do carrinho.");
+                default -> System.out.println("A quantidade a remover é superior à existente no carrinho " +
+                        "(Quantidade do produto no carrinho: " + stock + ").");
+            }
         }
     }
 
@@ -314,7 +319,7 @@ public class InterfaceUtilizador {
                 if(c == null) System.out.println("Email inválido.");
                 else {
                     System.out.printf("Login Válido...\n\nBom dia %s!\n", c.getNome());
-                    Data d = readData();
+                    Data d = readData(c);
                     int op2 = -1;
                     while(op2 != 4) {
                         System.out.println("""
@@ -329,7 +334,7 @@ public class InterfaceUtilizador {
                         switch (op2) {
                             case 1 -> menuCompra(d, c);
                             case 2 -> imprimirComprasRealizadas(c, d);
-                            case 3 -> d = readData();
+                            case 3 -> d = readData(c);
                             case 4 -> {}
                             default -> System.out.println("Opção inválida.");
                         }

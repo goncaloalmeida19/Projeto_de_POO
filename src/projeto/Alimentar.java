@@ -18,8 +18,16 @@ public class Alimentar extends Produto{
      * @param gordura Quantidade de gordura de um produto alimentar
      * @param stockInicial Stock inicial de um produto
      */
-    public Alimentar(String identificador, String nome, double precoUni, int calorias, double gordura, int stockInicial) {
+    public Alimentar(String identificador, String nome, double precoUni, int calorias, double gordura, int stockInicial){
         super(identificador, nome, precoUni, stockInicial);
+        if(calorias < 0){
+            System.out.println("Número de calorias inválido.");
+            throw new NumberFormatException();
+        }
+        if(gordura < 0 || gordura > 100){
+            System.out.println("Percetagem de gordura inválida.");
+            throw new NumberFormatException();
+        }
         this.calorias = calorias;
         this.gordura = gordura;
     }
