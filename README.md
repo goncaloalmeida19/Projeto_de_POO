@@ -24,36 +24,36 @@ O login deverá ser efetuado apenas através do endereço de e-mail.
 Implementação
 
 A aplicação deverá ser implementada na linguagem Java e ter em conta os seguintes aspetos:
-	1. Elaboração de um diagrama de classes (UML) antes de iniciar a implementação, para prever a estrutura do projeto.
-	2. Cada classe deverá gerir internamente os seus dados, pelo que deverá cuidar da proteção das suas variáveis e métodos.
-	3. Cada classe deverá ser responsável por uma tarefa ou objetivo específico, não lhe devendo ser atribuídas funções indevidas.
-	4. Utilize a keyword static apenas quando tal se justifique e não para contornar erros do compilador.
-	5. Comente as classes e os métodos públicos segundo o formato Javadoc. Isto permitirá gerar automaticamente uma estrutura de ficheiros HTML. Comente o restante código sempre que a leitura dos algoritmos não seja óbvia.
-	6. Evite o uso abusivo de variáveis e métodos public.
-	7. Não são aceites soluções que utilizem instanceof e class.getName().
-	8. Na escolha de nomes para variáveis, classes e métodos, devem ser seguidas as convenções adotadas na linguagem Java.
-	9. Na organização das classes deverá ser evitada a redundância do código.
+  1) Elaboração de um diagrama de classes (UML) antes de iniciar a implementação, para prever a estrutura do projeto.
+  2) Cada classe deverá gerir internamente os seus dados, pelo que deverá cuidar da proteção das suas variáveis e métodos.
+  3) Cada classe deverá ser responsável por uma tarefa ou objetivo específico, não lhe devendo ser atribuídas funções indevidas.
+  4) Utilize a keyword static apenas quando tal se justifique e não para contornar erros do compilador.
+  5) Comente as classes e os métodos públicos segundo o formato Javadoc. Isto permitirá gerar automaticamente uma estrutura de ficheiros HTML. Comente o restante código sempre que a leitura dos algoritmos não seja óbvia.
+  6) Evite o uso abusivo de variáveis e métodos public.
+  7) Não são aceites soluções que utilizem instanceof e class.getName().
+  8) Na escolha de nomes para variáveis, classes e métodos, devem ser seguidas as convenções adotadas na linguagem Java.
+  9) Na organização das classes deverá ser evitada a redundância do código.
 	
 Entrega
 
 O projeto deve ser realizado em grupos de dois estudantes da mesma turma prática.
 
 Devem ser entregues os seguintes ficheiros (sem compressão):
-• Diagrama de classes em UML (pdf).
-• Todas as classes .java.
-• Ficheiros de dados para teste.
-• Javadoc (HTML).
-• Relatório (pdf).
+  1) Diagrama de classes em UML (pdf).
+  2) Todas as classes .java.
+  3) Ficheiros de dados para teste.
+  4) Javadoc (HTML).
+  5) Relatório (pdf).
 
 Avaliação do trabalho
 
 Para a avaliação do trabalho são considerados fatores de dois tipos:
-	• Caixa preta (tal como é percecionado pelo utilizador):
-		o Conjunto de funcionalidades implementadas.
-		o Robustez do programa.
-		o Qualidade da interface.
-	• Caixa branca (a forma como está construído):
-		o Qualidade das soluções técnicas encontradas para os problemas.
-		o Estruturação do código.
-		o Qualidade dos comentários.
+  1) Caixa preta (tal como é percecionado pelo utilizador):
+  	o Conjunto de funcionalidades implementadas.
+	o Robustez do programa.
+	o Qualidade da interface.
+  2) Caixa branca (a forma como está construído):
+	o Qualidade das soluções técnicas encontradas para os problemas.
+	o Estruturação do código.
+	o Qualidade dos comentários.
 	
