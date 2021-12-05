@@ -3,7 +3,7 @@ package projeto;
 import java.io.Serializable;
 
 /**
- * Classe que contém um item.
+ * Classe que representa um item.
  * Contém um produto e uma quantidade.
  */
 public class Item implements Serializable {
