@@ -2,12 +2,15 @@ package projeto;
 
 import java.util.List;
 
+/**
+ * Classe Main do projeto.
+ */
 public class Main {
     public static void main(String[] args) {
         GestorFicheiros gf = new GestorFicheiros();
 
         CadeiaSupermercados cad = new CadeiaSupermercados();
-        if(gf.lerFichObj()){ //verificar se o ficheiro de objetos existe
+        if(gf.lerFichObj()){ //Verificar se o ficheiro de objetos com os dados da cadeia de supermercados existe
             cad = gf.lerCadSup();
             if(cad == null) return;
         } else{

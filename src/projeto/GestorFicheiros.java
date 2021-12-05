@@ -4,11 +4,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que gere leituras e escritas em ficheiros.
+ */
 public class GestorFicheiros {
+    /**
+     * Construtor da classe GestorFicheiros
+     */
     public GestorFicheiros(){
     }
 
-    //constantes
+    //Constantes
     private static final String fpath = "src/projeto/";
     private static final String fClientes = "clientes.txt";
     private static final String fProdutos = "produtos.txt";
@@ -16,8 +22,8 @@ public class GestorFicheiros {
     private static final String fCadSup = "cadSup.obj";
 
     /**
-     * Ler o ficheiro dos clientes
-     * @return lista de clientes
+     * Método para ler o ficheiro dos clientes
+     * @return Lista de clientes presentes no ficheiro
      */
     public List<Cliente> obterClientes(){
         int linha_erro = 0;
@@ -57,8 +63,8 @@ public class GestorFicheiros {
     }
 
     /**
-     * Ler o ficheiro dos produtos
-     * @return lista de produtos
+     * Método para ler o ficheiro dos produtos
+     * @return Lista de produtos presentes no ficheiro
      */
     public List<Produto> obterProdutos(){
         int linha_erro = 0;
@@ -104,9 +110,9 @@ public class GestorFicheiros {
 
 
     /**
-     * Ler o ficheiro de texto que contem as promoções dos produtos
-     * @param produtos lista de produtos a ser atualizada com promoções
-     * @return lista de produtos atualizada com as promoções
+     * Método para ler o ficheiro de texto que contém as promoções dos produtos
+     * @param produtos Lista de produtos a ser atualizada com as promoções presentes no ficheiro
+     * @return Lista de produtos atualizada com as promoções presentes no ficheiro
      */
     public List<Produto> obterPromocoes(List<Produto> produtos){
         int linha_erro = 0;
@@ -159,8 +165,8 @@ public class GestorFicheiros {
     }
 
     /**
-     * Escreve os dados da cadeia de supermercados no ficheiro de objetos
-     * @param cad cadeia de supermercados cujos dados irão ser registados
+     * Método para escrever os dados da cadeia de supermercados num ficheiro de objetos
+     * @param cad Cadeia de supermercados cujos dados irão ser registados
      */
     public void escreverCadSup(CadeiaSupermercados cad){
         try {
@@ -177,8 +183,8 @@ public class GestorFicheiros {
     }
 
     /**
-     * Lê os dados da cadeia de supermercados do ficheiro de objetos
-     * @return cadeia de supermercados lida
+     * Método para ler os dados da cadeia de supermercados do ficheiro de objetos
+     * @return Cadeia de supermercados lida
      */
     public CadeiaSupermercados lerCadSup(){
         try {
@@ -199,8 +205,8 @@ public class GestorFicheiros {
     }
 
     /**
-     * Função que verifica se o ficheiro de objetos já foi criado
-     * @return true se o ficheiro de objetos já foi criado, false em caso contrário
+     * Método para verificar se o ficheiro de objetos já foi criado
+     * @return true, se o ficheiro de objetos já foi criado, ou false, caso contrário
      */
     public boolean lerFichObj(){
         File f = new File(fpath + fCadSup);

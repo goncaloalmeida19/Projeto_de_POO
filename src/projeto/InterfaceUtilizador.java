@@ -3,17 +3,29 @@ package projeto;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe que gere leituras e escritas na consola.
+ */
 public class InterfaceUtilizador {
     private final CadeiaSupermercados cad;
     private final Scanner scanner;
     private final GestorFicheiros gf;
 
+    /**
+     * Construtor da classe InterfaceUtilizador
+     * @param cad Cadeia de supermercados que contém a lista de clientes e a lista de produtos associadas à cadeia
+     * @param gf Gestor de ficheiros para a escrita dos dados da cadeia de supermercados após o cliente sair do programa
+     */
     public InterfaceUtilizador(CadeiaSupermercados cad, GestorFicheiros gf){
         this.cad = cad;
         scanner = new Scanner(System.in);
         this.gf = gf;
     }
 
+    /**
+     * Método para ler uma String da consola
+     * @return String lida da consola
+     */
     private String readString(){
         String s;
         do{
@@ -22,7 +34,11 @@ public class InterfaceUtilizador {
         return s;
     }
 
-    // Método que lê um inteiro positivo e devolve-o sem erros, se um acontecer devolve -1 (sendo considerado erro neste programa)
+    /**
+     * Método para ler um número inteiro positivo da consola
+     * @return Valor de um número inteiro positivo lido da consola caso não haja erros ou
+     * -1 (sendo considerado erro neste programa), caso contrário
+     */
     private int readIntProtection(){
         if(scanner.hasNextInt()){
             int i = scanner.nextInt();
@@ -34,7 +50,10 @@ public class InterfaceUtilizador {
         }
     }
 
-    // Método que lê uma data e devolve-a, sendo null em caso de erro
+    /**
+     * Método para ler uma data
+     * @return Data lida da consola ou null, em caso de erro
+     */
     private Data readData(){
         Data d = new Data(0, 0 ,0);
         boolean valido = true;
@@ -62,6 +81,11 @@ public class InterfaceUtilizador {
         return d;
     }
 
+    /**
+     * Método para imprimir as compras realizadas por um cliente até a uma data
+     * @param cliente Cliente cujas compras realizadas serão impressas
+     * @param data Data até à qual as compras realizadas antes da mesma serão impressas
+     */
     private void imprimirComprasRealizadas(Cliente cliente, Data data){
         List<Compra> compras = cliente.obterComprasAteData(data);
         if(compras.size() == 0) System.out.println("\nNão foi encontrada nenhuma compra até " + data);
@@ -77,6 +101,11 @@ public class InterfaceUtilizador {
         }
     }
 
+    /**
+     * Método para adicionar um item, um produto e a sua quantidade, ao carrinho de um cliente
+     * @param compra Carrinho de um cliente
+     * @param compras Lista de compras realizadas por todos os clientes
+     */
     private void adicionarItemCarrinho(Compra compra, List<Compra> compras){
         System.out.print("Produto a adicionar: ");
         String nomeProduto = readString();
@@ -106,6 +135,10 @@ public class InterfaceUtilizador {
         }
     }
 
+    /**
+     * Método para a impressão do catálogo e para adicionar um produto ao carrinho de um cliente
+     * @param compra Carrinho de um cliente
+     */
     private void realizarCompra(Compra compra){
         int op = 1;
         List<Compra> compras = cad.obterCompras();
@@ -123,6 +156,10 @@ public class InterfaceUtilizador {
         }
     }
 
+    /**
+     * Método para remover um item, um produto e a sua quantidade, do carrinho de um cliente
+     * @param compra Carrinho de um cliente
+     */
     private void removerItemCarrinho(Compra compra){
         System.out.print("Produto a remover: ");
         String nomeProduto = readString();
@@ -144,6 +181,11 @@ public class InterfaceUtilizador {
         }
     }
 
+    /**
+     * Método para imprimir o carrinho de um cliente, com a possibilidade de remover itens, um produto e a sua quantidade, do carrinho
+     * @param compra Carrinho de um cliente
+     * @param cliente Cliente que realiza uma compra
+     */
     private void verCarrinho(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
@@ -181,13 +223,23 @@ public class InterfaceUtilizador {
         }
     }
 
-    private boolean printFinal(Compra compra, Cliente cliente){
-        cad.confirmaCompra(compra, cliente);
+    /**
+     * Método para adicionar o carrinho de um cliente à sua lista de compras realizadas e para imprimir a confirmação da compra
+     * @param compra Carrinho do cliente a adicionar à sua lista de compras
+     * @param cliente Cliente que realizou uma compra
+     */
+    private void printFinal(Compra compra, Cliente cliente){
+        cliente.addCompra(compra);
         System.out.println("\nEncomenda enviada para " + cliente.getMorada() +
                            " em nome de " + cliente.getNome());
-        return true;
     }
 
+    /**
+     * Método para confirmar o carrinho, e os preços finais do mesmo, de um cliente
+     * @param compra Carrinho de um cliente
+     * @param cliente Cliente que realiza uma compra
+     * @return true, caso uma compra tenha sido realizada, ou false, caso contrário
+     */
     private boolean confirmarCompra(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
@@ -204,7 +256,7 @@ public class InterfaceUtilizador {
                 System.out.print("Opção: ");
                 op = readIntProtection();
                 switch(op){
-                    case 1 -> { if(printFinal(compra, cliente)) return true; }
+                    case 1 -> { printFinal(compra, cliente); return true; }
                     case 2 -> {}
                     default -> System.out.println("Opção inválida.");
                 }
@@ -214,6 +266,11 @@ public class InterfaceUtilizador {
         return false;
     }
 
+    /**
+     * Método para imprimir o menu de compra
+     * @param data Data em que a compra se realiza
+     * @param cliente Cliente que realiza uma compra
+     */
     private void menuCompra(Data data, Cliente cliente) {
         int op = -1;
         Compra compra = new Compra(data);
@@ -241,6 +298,9 @@ public class InterfaceUtilizador {
         }
     }
 
+    /**
+     * Método para sair do programa, iniciar sessão e imprimir o menu da aplicação
+     */
     public void menu(){
         int op = -1;
         while (op != 2) {

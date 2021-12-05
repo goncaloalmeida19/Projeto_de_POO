@@ -104,7 +104,7 @@ public class Compra implements Serializable {
      * Método para adicionar um ‘item’ ao carrinho
      * @param produto Produto a adicionar
      * @param quantidade Quantidade do produto a adicionar
-     * @param compras Lista de compras realizadas
+     * @param compras Lista de compras realizadas por todos os clientes
      * @return -2, se correr tudo bem, -1, se não houver stock suficiente, ou stock atual, se este for inferior
      * à quantidade pedida
      */
