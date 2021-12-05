@@ -2,7 +2,7 @@ package projeto;
 
 /**
  * Classe que representa um produto alimentar.
- * Contém o nºcalorias/100g e a percentagem de gordura,
+ * Contém o número de calorias/100g e a percentagem de gordura,
  * além dos atributos que um produto já contém.
  */
 public class Alimentar extends Produto{

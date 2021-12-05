@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que representa um cliente. Contém o seu nome, morada, email, telefone,
- * data de nascimentoe lista de compras realizadas.
+ * Classe que representa um cliente.
+ * Contém o seu nome, morada, email, telefone,
+ * data de nascimento e lista de compras realizadas.
  */
 public abstract class Cliente implements Serializable {
     private final String nome;

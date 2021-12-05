@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que contém um produto.
- * Carateriza-se pelo identificador, nome, preço unitário,
- * lista de promoções datadas e pelo stock inicial de um
- * produto.
+ * Classe que representa um produto.
+ * Contém o identificador, nome, preço unitário,
+ * lista de promoções datadas e o stock inicial
+ * de um produto.
  */
 public abstract class Produto implements Serializable {
     protected final String identificador;

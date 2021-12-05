@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 /**
  * Classe que contém um item.
- * Carateriza-se por um produto e quantidade.
+ * Contém um produto e uma quantidade.
  */
 public class Item implements Serializable {
     private final Produto produto;
     private int quantidade;
 
     /**
-     * Construtor da classe cosntrutor
+     * Construtor da classe constructor
      * @param produto Produto de um item
      * @param quantidade Quantidade de um item
      */

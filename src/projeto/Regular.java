@@ -1,8 +1,8 @@
 package projeto;
 
 /**
- * Classe que contém um cliente regular.
- * Carateriza-se pelos atributos que um cliente já possui,
+ * Classe que representa um cliente regular.
+ * Contém os atributos que um cliente já possui,
  * sendo que a função precoDeEnvio devolve um preço específico
  * para este tipo de cliente.
  */

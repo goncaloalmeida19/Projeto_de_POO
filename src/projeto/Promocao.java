@@ -3,8 +3,8 @@ package projeto;
 import java.io.Serializable;
 
 /**
- * Classe que contém uma promoção.
- * Carateriza-se com a data inicial e final de uma promoção.
+ * Classe que representa uma promoção.
+ * Contém a data inicial e final de uma promoção.
  */
 public abstract class Promocao implements Serializable {
     private final Data inicio;

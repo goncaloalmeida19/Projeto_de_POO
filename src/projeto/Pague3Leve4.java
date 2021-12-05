@@ -1,8 +1,8 @@
 package projeto;
 
 /**
- * Classe que contém um produto Pague3Leve4.
- * Carateriza-se com os atributos que uma promoção.
+ * Classe que representa uma promoção do tipo Pague3Leve4.
+ * Contém os atributos de uma promoção.
  */
 public class Pague3Leve4 extends Promocao{
     /**
