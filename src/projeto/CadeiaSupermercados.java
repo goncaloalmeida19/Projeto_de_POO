@@ -68,9 +68,7 @@ public class CadeiaSupermercados implements Serializable {
      */
     public List<Compra> obterCompras(){
         List<Compra> compras = new ArrayList<>();
-        for(Cliente c: clientes){
-            compras.addAll(c.getCompras());
-        }
+        for(Cliente c: clientes) compras.addAll(c.getCompras());
         return compras;
     }
 
