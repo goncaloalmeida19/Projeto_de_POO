@@ -37,7 +37,7 @@ public class InterfaceUtilizador {
     /**
      * Método para ler um número inteiro positivo da consola
      * @return Valor de um número inteiro positivo lido da consola caso não haja erros ou
-     * -1 (sendo considerado erro neste programa), caso contrário
+     * -1 (sendo considerado erro neste método), caso contrário
      */
     private int readIntProtection(){
         if(scanner.hasNextInt()){
