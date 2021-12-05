@@ -109,7 +109,7 @@ public class Compra implements Serializable {
      * @return -2, se correr tudo bem, -1, se não houver stock suficiente, ou stock atual, se este for inferior
      * à quantidade pedida
      */
-    public int addCarrinho(Produto produto, int quantidade, List<Compra> compras) {
+    public int adicionarCarrinho(Produto produto, int quantidade, List<Compra> compras) {
         Item i = contemProduto(produto);
         int stockAtual = produto.obterStockAtual(data, compras);
         if(i == null){

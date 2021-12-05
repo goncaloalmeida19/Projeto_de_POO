@@ -122,7 +122,7 @@ public class InterfaceUtilizador {
                 if(!valido || quantidade <= 0) System.out.println("Insira uma quantidade válida.");
             }while(quantidade <= 0);
 
-            int adiciona = compra.addCarrinho(produto, quantidade, compras);
+            int adiciona = compra.adicionarCarrinho(produto, quantidade, compras);
 
             switch (adiciona) {
                 case -1 -> System.out.println("Não existe stock para o produto requerido.");
