@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Classe que representa um produto.
  * Contém o identificador, nome, preço unitário,
- * lista de promoções datadas e o stock inicial
+ * lista de promoções e o stock inicial
  * de um produto.
  */
 public abstract class Produto implements Serializable {
