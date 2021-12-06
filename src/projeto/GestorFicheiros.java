@@ -159,7 +159,7 @@ public class GestorFicheiros {
                 for(Produto p: produtos){
                     if(p.getIdentificador().equals(sp[1])){
                         encontrou = true;
-                        p.addPromocoes(prom);
+                        p.adicionarPromocoes(prom);
                     }
                 }
                 if(!encontrou){

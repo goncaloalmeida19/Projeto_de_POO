@@ -60,7 +60,7 @@ public abstract class Produto implements Serializable {
      * Método que adiciona uma promoção à lista de promoções de um produto
      * @param p Promoção a adicionar à lista de promoções de um produto
      */
-    public void addPromocoes(Promocao p){
+    public void adicionarPromocoes(Promocao p){
         promocoes.add(p);
     }
 
