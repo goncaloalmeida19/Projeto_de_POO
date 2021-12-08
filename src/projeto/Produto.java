@@ -118,9 +118,11 @@ public abstract class Produto implements Serializable {
 
     /**
      * Método para devolver o preço de envio de um produto
-     * @return Preço de envio de um produto
+     * @return 0, pois o envio de um produto não acresce o preço de envio de uma compra
      */
-    public abstract double precoDeEnvio();
+    public double precoDeEnvio(){
+        return 0;
+    }
 
     /**
      * Método toString da classe Produto

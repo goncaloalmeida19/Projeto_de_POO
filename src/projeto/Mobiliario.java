@@ -32,6 +32,7 @@ public class Mobiliario extends Produto{
      * Método para devolver o preço de envio de um produto de mobiliário
      * @return 0, caso o peso do produto não exceda o valor 15, e 10, caso o peso do produto exceda o valor 15
      */
+    @Override
     public double precoDeEnvio(){
         if(peso > 15) return 10;
         else return 0;

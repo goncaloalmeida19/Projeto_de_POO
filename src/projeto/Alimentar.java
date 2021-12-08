@@ -33,14 +33,6 @@ public class Alimentar extends Produto{
     }
 
     /**
-     * Método para devolver o preço de envio de um produto alimentar
-     * @return 0, pois o envio de um produto alimentar não acresce o preço de envio de uma compra
-     */
-    public double precoDeEnvio(){
-        return 0;
-    }
-
-    /**
      * Método toString da classe Alimentar
      * @return Nome e identificador de um produto acompanhado pela sua descrição definida pela categoria de produto (Alimentar)
      */

@@ -25,13 +25,6 @@ public class Limpeza extends Produto{
         this.toxicidade = toxicidade;
     }
 
-    /**
-     * Método para devolver o preço de envio de um produto de limpeza
-     * @return 0, pois o envio de um produto limpeza não acresce o preço de envio de uma compra
-     */
-    public double precoDeEnvio(){
-        return 0;
-    }
 
     /**
      * Método toString da classe Limpeza
