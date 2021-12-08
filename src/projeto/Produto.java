@@ -138,5 +138,7 @@ public abstract class Produto implements Serializable {
      * @return String com informações acerca do produto
      */
     @Override
-    public abstract String toString();
+    public String toString(){
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n\t\t";
+    }
 }

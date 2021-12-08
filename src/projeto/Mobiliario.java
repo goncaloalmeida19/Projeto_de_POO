@@ -43,7 +43,7 @@ public class Mobiliario extends Produto{
      */
     @Override
     public String toString() {
-        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n\t\tPeso: "
+        return super.toString() + "Peso: "
                 + peso + "kg\n" + "\t\tDimensão: " + dim + "\n\t\tPreço Unitário: " + precoUni;
     }
 }
