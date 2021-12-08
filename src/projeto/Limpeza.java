@@ -39,7 +39,7 @@ public class Limpeza extends Produto{
      */
     @Override
     public String toString() {
-        return super.toString() + "Grau de toxidade: "
+        return super.toString() + "\n\t\tGrau de toxidade: "
                 + toxicidade + "\n\t\tPreço Unitário: " + precoUni;
     }
 }

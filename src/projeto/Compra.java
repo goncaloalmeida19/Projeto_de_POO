@@ -192,6 +192,20 @@ public class Compra implements Serializable {
     }
 
     /**
+     * Método para procurar um produto numa compra
+     * @param p Produto
+     * @return Quantidade de um produto na compra
+     */
+    public int encontrarNaCompra(Produto p){
+        for(Item i: carrinho)
+            if(i.getProduto().igual(p))
+                return i.getQuantidade();
+        return 0;
+    }
+
+
+
+    /**
      * Método para remover todos os itens do carrinho
      */
     public void clear(){

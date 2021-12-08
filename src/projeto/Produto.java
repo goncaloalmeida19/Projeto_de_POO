@@ -11,8 +11,8 @@ import java.util.List;
  * de um produto.
  */
 public abstract class Produto implements Serializable {
-    protected final String identificador;
-    protected final String nome;
+    private final String identificador;
+    private final String nome;
     protected final double precoUni;
     private final List<Promocao> promocoes;
     private final int stockInicial;
@@ -100,18 +100,7 @@ public abstract class Produto implements Serializable {
     public boolean igual(Produto p){
         return identificador.equals(p.identificador);
     }
-    
-    /**
-     * Método para procurar um produto numa compra
-     * @param c Compra
-     * @return Quantidade de um produto na compra
-     */
-    private int encontrarNaCompra(Compra c){
-        for(Item i: c.getCarrinho())
-            if(i.getProduto().igual(this))
-                return i.getQuantidade();
-        return 0;
-    }
+
 
     /**
      * Método para obter o stock de um produto numa data
@@ -121,9 +110,9 @@ public abstract class Produto implements Serializable {
      */
     public int obterStockAtual(Data d, List<Compra> compras){
         int stockAtual = stockInicial;
-        for(Compra v: compras)
-            if(d.compareTo(v.getData()) >= 0)
-                stockAtual -= encontrarNaCompra(v);
+        for(Compra c: compras)
+            if(d.compareTo(c.getData()) >= 0)
+                stockAtual -= c.encontrarNaCompra(this);
         return stockAtual;
     }
 
@@ -139,6 +128,6 @@ public abstract class Produto implements Serializable {
      */
     @Override
     public String toString(){
-        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:\n\t\t";
+        return "\t" + nome + "(" + identificador + ")\n\tDescrição do produto:";
     }
 }

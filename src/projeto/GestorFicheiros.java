@@ -8,18 +8,23 @@ import java.util.List;
  * Classe que gere leituras e escritas em ficheiros.
  */
 public class GestorFicheiros {
+    //diretório e nomes dos ficheiros
+    private final String fPath;
+    private final String fClientes;
+    private final String fProdutos;
+    private final String fPromocoes;
+    private final String fCadSup;
+
     /**
      * Construtor da classe GestorFicheiros
      */
-    public GestorFicheiros(){
+    public GestorFicheiros(String fPath, String fClientes, String fProdutos, String fPromocoes, String fCadSup){
+        this.fPath = fPath;
+        this.fClientes = fClientes;
+        this.fProdutos = fProdutos;
+        this.fPromocoes = fPromocoes;
+        this.fCadSup = fCadSup;
     }
-
-    //Constantes
-    private static final String fpath = "src/projeto/";
-    private static final String fClientes = "clientes.txt";
-    private static final String fProdutos = "produtos.txt";
-    private static final String fPromocoes = "promocoes.txt";
-    private static final String fCadSup = "cadSup.obj";
 
     /**
      * Método para ler o ficheiro dos clientes
@@ -27,7 +32,7 @@ public class GestorFicheiros {
      */
     public List<Cliente> obterClientes(){
         int linha_erro = 0;
-        File f = new File(fpath + fClientes);
+        File f = new File(fPath + fClientes);
         try{
             List<Cliente> clientes = new ArrayList<>();
             FileReader fr = new FileReader(f);
@@ -74,7 +79,7 @@ public class GestorFicheiros {
      */
     public List<Produto> obterProdutos(){
         int linha_erro = 0;
-        File f = new File(fpath + fProdutos);
+        File f = new File(fPath + fProdutos);
         try{
             List<Produto> produtos = new ArrayList<>();
             FileReader fr = new FileReader(f);
@@ -122,7 +127,7 @@ public class GestorFicheiros {
      */
     public List<Produto> obterPromocoes(List<Produto> produtos){
         int linha_erro = 0;
-        File f = new File(fpath + fPromocoes);
+        File f = new File(fPath + fPromocoes);
         try{
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
@@ -187,7 +192,7 @@ public class GestorFicheiros {
      */
     public void escreverCadSup(CadeiaSupermercados cad){
         try {
-            File f = new File(fpath + fCadSup);
+            File f = new File(fPath + fCadSup);
             FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(cad);
@@ -205,7 +210,7 @@ public class GestorFicheiros {
      */
     public CadeiaSupermercados lerCadSup(){
         try {
-            File f = new File(fpath + fCadSup);
+            File f = new File(fPath + fCadSup);
             FileInputStream fis = new FileInputStream(f);
             ObjectInputStream ois = new ObjectInputStream(fis);
             CadeiaSupermercados cad = (CadeiaSupermercados) ois.readObject();
@@ -226,7 +231,7 @@ public class GestorFicheiros {
      * @return true, se o ficheiro de objetos já foi criado, ou false, caso contrário
      */
     public boolean lerFichObj(){
-        File f = new File(fpath + fCadSup);
+        File f = new File(fPath + fCadSup);
         return f.exists();
     }
 }
