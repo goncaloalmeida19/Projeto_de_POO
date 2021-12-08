@@ -203,8 +203,6 @@ public class Compra implements Serializable {
         return 0;
     }
 
-
-
     /**
      * Método para remover todos os itens do carrinho
      */
