@@ -175,13 +175,17 @@ public class Compra implements Serializable {
         carrinho.clear();
     }
 
-
+    /**
+     * Método para obter uma String com os preços com e sem portes de uma compra (ou carrinho)
+     * @param cliente Cliente à qual a compra (ou carrinho) está associada
+     * @return String com os preços com e sem portes de uma compra (ou carrinho)
+     */
     public String obterPrecos(Cliente cliente){
         String precos = "";
         double preco = precoSemEnvio();
         precos = precos.concat("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
         double precoFinal = precoDeEnvioTotal(cliente, preco) + preco;
-        precos = precos.concat("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€\n");
+        precos = precos.concat("\nPreço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€\n");
         return precos;
     }
 

@@ -93,8 +93,7 @@ public class InterfaceUtilizador {
         else{
             System.out.println("\nCompras realizadas até " + data + ":\n");
             for(Compra c: compras){
-                System.out.println("Compra do dia " + c.getData() + ":" + c);
-                System.out.println(c.obterPrecos(cliente));
+                System.out.println("Compra do dia " + c.getData() + ":" + c + c.obterPrecos(cliente));
             }
         }
     }
@@ -194,8 +193,7 @@ public class InterfaceUtilizador {
             int op = 1;
             while(op != 3){
                 List<Item> carrinho = compra.getCarrinho();
-                System.out.println("\nCarrinho: " + compra);
-                System.out.println(compra.obterPrecos(cliente));
+                System.out.println("\nCarrinho: " + compra + compra.obterPrecos(cliente));
                 System.out.println("""
     
                         1. Remover produto do carrinho.
@@ -241,8 +239,7 @@ public class InterfaceUtilizador {
     private boolean confirmarCompra(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
-            System.out.println("\nCarrinho final:" + compra);
-            System.out.println(compra.obterPrecos(cliente));
+            System.out.println("\nCarrinho final:" + compra + compra.obterPrecos(cliente));
             int op = 1;
             while(op != 2){
                 System.out.println("1. Confirmar a compra.\n2. Voltar para o menu de compra.");
