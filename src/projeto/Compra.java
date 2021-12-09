@@ -12,8 +12,6 @@ import java.util.List;
 public class Compra implements Serializable {
     private final Data data;
     private final List<Item> carrinho;
-    private double precoSemEnvioFinal;
-    private double precoComEnvioFinal;
 
     /**
      * Construtor da classe Compra
@@ -38,39 +36,6 @@ public class Compra implements Serializable {
      */
     public List<Item> getCarrinho() {
         return carrinho;
-    }
-
-    /**
-     * Método para obter o preco sem envio final da compra
-     * @return preco sem envio final da compra
-     */
-    public double getPrecoSemEnvioFinal() {
-        return precoSemEnvioFinal;
-    }
-
-    /**
-     * Método para obter o preco com envio final da compra
-     * @return preco com envio final da compra
-     */
-    public double getPrecoComEnvioFinal() {
-        return precoComEnvioFinal;
-    }
-
-
-    /**
-     * Método para definir o preco sem envio final da compra
-     * @param precoSemEnvioFinal preço a definir
-     */
-    public void setPrecoSemEnvioFinal(double precoSemEnvioFinal) {
-        this.precoSemEnvioFinal = precoSemEnvioFinal;
-    }
-
-    /**
-     * Método para definir o preco com envio final da compra
-     * @param precoComEnvioFinal preço a definir
-     */
-    public void setPrecoComEnvioFinal(double precoComEnvioFinal) {
-        this.precoComEnvioFinal = precoComEnvioFinal;
     }
 
     /**
@@ -168,7 +133,7 @@ public class Compra implements Serializable {
      * @param preco Preço da compra (s/ portes)
      * @return Preço de envio da compra
      */
-    public double precoDeEnvioTotal(Cliente cliente, double preco) {
+    private double precoDeEnvioTotal(Cliente cliente, double preco) {
         double envio = cliente.precoDeEnvio(preco);
 
         // Se for um produto do tipo mobiliário irá somar 15 euros, ao preço final, por produto
@@ -183,7 +148,7 @@ public class Compra implements Serializable {
      * Método para obter o preço de uma compra (s/ portes)
      * @return Preço de uma compra (s/ portes)
      */
-    public double precoSemEnvio(){
+    private double precoSemEnvio(){
         double preco = 0.0;
         for(Item i: carrinho){
             preco += i.getProduto().obterPreco(i.getQuantidade(), data);
@@ -208,6 +173,16 @@ public class Compra implements Serializable {
      */
     public void clear(){
         carrinho.clear();
+    }
+
+
+    public String obterPrecos(Cliente cliente){
+        String precos = "";
+        double preco = precoSemEnvio();
+        precos = precos.concat("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
+        double precoFinal = precoDeEnvioTotal(cliente, preco) + preco;
+        precos = precos.concat("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€\n");
+        return precos;
     }
 
     /**

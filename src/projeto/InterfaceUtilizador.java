@@ -94,11 +94,7 @@ public class InterfaceUtilizador {
             System.out.println("\nCompras realizadas até " + data + ":\n");
             for(Compra c: compras){
                 System.out.println("Compra do dia " + c.getData() + ":" + c);
-                double preco = c.getPrecoSemEnvioFinal();
-                System.out.println("\n\tPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
-                double precoFinal = c.getPrecoComEnvioFinal();
-                System.out.println("\tPreço com portes (c/ promoção): "
-                        + String.format("%.2f",precoFinal) + "€\n");
+                System.out.println(c.obterPrecos(cliente));
             }
         }
     }
@@ -195,15 +191,11 @@ public class InterfaceUtilizador {
     private void verCarrinho(Compra compra, Cliente cliente){
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
-        int op = 1;
-        while(op != 3){
-            List<Item> carrinho = compra.getCarrinho();
-            System.out.println("\nCarrinho: " + compra);
-                double preco = compra.precoSemEnvio();
-                System.out.println("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
-                double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-                System.out.println("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€");
-
+            int op = 1;
+            while(op != 3){
+                List<Item> carrinho = compra.getCarrinho();
+                System.out.println("\nCarrinho: " + compra);
+                System.out.println(compra.obterPrecos(cliente));
                 System.out.println("""
     
                         1. Remover produto do carrinho.
@@ -250,12 +242,7 @@ public class InterfaceUtilizador {
         if(compra.getCarrinho().size() == 0) System.out.println("O carrinho encontra-se vazio.");
         else{
             System.out.println("\nCarrinho final:" + compra);
-            double preco = compra.precoSemEnvio();
-            compra.setPrecoSemEnvioFinal(preco);
-            System.out.println("\nPreço sem portes (c/ promoção): " + String.format("%.2f",preco) + "€");
-            double precoFinal = compra.precoDeEnvioTotal(cliente, preco) + preco;
-            compra.setPrecoComEnvioFinal(precoFinal);
-            System.out.println("Preço com portes (c/ promoção): " + String.format("%.2f",precoFinal) + "€\n");
+            System.out.println(compra.obterPrecos(cliente));
             int op = 1;
             while(op != 2){
                 System.out.println("1. Confirmar a compra.\n2. Voltar para o menu de compra.");
