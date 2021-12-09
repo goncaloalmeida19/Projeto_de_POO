@@ -41,7 +41,16 @@ public class GestorFicheiros {
             while((l = br.readLine()) != null){
                 linha_erro++;
                 String[] sp = l.split(";");
+                if(sp.length != 6){
+                    System.out.println("Erro no formato do ficheiro " + fClientes + " na linha " + linha_erro);
+                    return null;
+                }
+
                 String[] data = sp[4].split("/");
+                if(data.length != 3){
+                    System.out.println("Erro no formato do ficheiro " + fClientes + " na linha " + linha_erro);
+                    return null;
+                }
 
                 Data nasc = new Data(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2]));
                 if(!nasc.eValida()) {
@@ -63,12 +72,10 @@ public class GestorFicheiros {
             return clientes;
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fClientes);
-        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-            //verificar se o erro ocorreu numa linha específica do ficheiro de texto
-            if(linha_erro != 0)
-                System.out.println("Erro no formato do ficheiro " + fClientes + " na linha " + linha_erro);
-            else
-                System.out.println("Erro no formato do ficheiro " + fClientes);
+        } catch(ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Erro no formato do ficheiro " + fClientes + " na linha " + linha_erro);
+        } catch(NumberFormatException ex) {
+            System.out.println("Erro ao ler um número do ficheiro " + fClientes + " na linha " + linha_erro);
         }
         return null;
     }
@@ -89,11 +96,27 @@ public class GestorFicheiros {
                 linha_erro++;
                 String[] sp = l.split(";");
                 switch (sp[0]) {
-                    case "alimentar" -> produtos.add(new Alimentar(sp[1], sp[2], Double.parseDouble(sp[3]), Integer.parseInt(sp[4]),
-                            Double.parseDouble(sp[5]), Integer.parseInt(sp[6])));
-                    case "limpeza" -> produtos.add(new Limpeza(sp[1], sp[2], Double.parseDouble(sp[3]), Integer.parseInt(sp[4]),
-                            Integer.parseInt(sp[5])));
+                    case "alimentar" -> {
+                        if(sp.length != 7){
+                            System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
+                            return null;
+                        }
+                        produtos.add(new Alimentar(sp[1], sp[2], Double.parseDouble(sp[3]), Integer.parseInt(sp[4]),
+                                Double.parseDouble(sp[5]), Integer.parseInt(sp[6])));
+                    }
+                    case "limpeza" -> {
+                        if(sp.length != 6){
+                            System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
+                            return null;
+                        }
+                        produtos.add(new Limpeza(sp[1], sp[2], Double.parseDouble(sp[3]), Integer.parseInt(sp[4]),
+                                Integer.parseInt(sp[5])));
+                    }
                     case "mobiliario" -> {
+                        if(sp.length != 9){
+                            System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
+                            return null;
+                        }
                         Dimensao dim = new Dimensao(Double.parseDouble(sp[5]), Double.parseDouble(sp[6]), Double.parseDouble(sp[7]));
                         produtos.add(new Mobiliario(sp[1], sp[2], Double.parseDouble(sp[3]), Integer.parseInt(sp[4]),
                                 dim, Integer.parseInt(sp[8])));
@@ -108,12 +131,10 @@ public class GestorFicheiros {
             return produtos;
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fProdutos);
-        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-            //verificar se o erro ocorreu numa linha específica do ficheiro de texto
-            if(linha_erro != 0)
-                System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
-            else
-                System.out.println("Erro no formato do ficheiro " + fProdutos);
+        } catch(ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Erro no formato do ficheiro " + fProdutos + " na linha " + linha_erro);
+        } catch(NumberFormatException ex) {
+            System.out.println("Erro ao ler um número do ficheiro " + fProdutos + " na linha " + linha_erro);
         }
         return null;
     }
@@ -135,8 +156,15 @@ public class GestorFicheiros {
             while((l = br.readLine()) != null){
                 linha_erro++;
                 String[] sp = l.split(";");
+                if(sp.length != 4){
+                    System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
                 String[] dataIni = sp[2].split("/");
-
+                if(dataIni.length != 3){
+                    System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
                 Data dIni = new Data(Integer.parseInt(dataIni[0]),Integer.parseInt(dataIni[1]),Integer.parseInt(dataIni[2]));
                 if(!dIni.eValida()) {
                     System.out.println("Data inválida no ficheiro " +  fPromocoes + " na linha " + linha_erro);
@@ -144,6 +172,10 @@ public class GestorFicheiros {
                 }
 
                 String[] dataFim = sp[3].split("/");
+                if(dataFim.length != 3){
+                    System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
+                    return null;
+                }
                 Data dFim = new Data(Integer.parseInt(dataFim[0]),Integer.parseInt(dataFim[1]),Integer.parseInt(dataFim[2]));
                 if(!dFim.eValida()) {
                     System.out.println("Data inválida no ficheiro " +  fPromocoes + " na linha " + linha_erro);
@@ -177,13 +209,12 @@ public class GestorFicheiros {
 
         } catch(IOException ex){
             System.out.println("Erro ao ler ficheiro " + fPromocoes);
-        } catch(NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-            //verificar se o erro ocorreu numa linha específica do ficheiro de texto
-            if(linha_erro != 0)
-                System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
-            else
-                System.out.println("Erro no formato do ficheiro " + fPromocoes);
+        } catch(ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Erro no formato do ficheiro " + fPromocoes + " na linha " + linha_erro);
+        }catch(NumberFormatException ex) {
+            System.out.println("Erro ao ler um número do ficheiro " + fPromocoes + " na linha " + linha_erro);
         }
+
         return null;
     }
 
