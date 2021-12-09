@@ -160,6 +160,7 @@ public class GestorFicheiros {
                     return null;
                 }
 
+                //procurar o produto correspondente à promoção
                 boolean encontrou = false;
                 for(Produto p: produtos){
                     if(p.getIdentificador().equals(sp[1])){
