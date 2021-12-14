@@ -1,6 +1,7 @@
 # Projeto_de_POO
 Projeto realizado no âmbito da displicina de Programação Orientada aos Objetos (LEI 2º ano)
-Nota: Erro no UML (Preço de Envio nos Produtos) e permite voltar para trás na data e realizar compras
+
+Nota: No UML o precoDeEnvio em 'Alimentar' e 'Limpeza' devia estar em 'Produto' e o programa permite voltar para trás na data e realizar compras
 
 Enunciado:
 
